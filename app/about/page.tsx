@@ -206,11 +206,85 @@ export default function AboutPage() {
                 </li>
               </ul>
             </div>
+      {/* Experience Timeline */}
+      <section className="w-full py-12 md:py-24 lg:py-32 bg-muted/40">
+        <div className="container px-4 md:px-6">
+          <div className="flex flex-col items-center justify-center space-y-4 text-center mb-10">
+            <div className="space-y-2">
+              <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary">Career</div>
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Professional Experience</h2>
+              <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed">
+                My journey through the cybersecurity industry.
+              </p>
+            </div>
+          </div>
+
+          <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-primary/40 before:to-transparent">
+            <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+              <div className="flex items-center justify-center w-10 h-10 rounded-full border border-primary/20 bg-background shadow-sm z-10 md:group-odd:ml-8 md:group-even:mr-8">
+                <Briefcase className="h-5 w-5 text-primary" />
+              </div>
+              <div className="w-full md:w-[calc(50%-4rem)] bg-background p-5 rounded-lg border border-primary/20 shadow-sm">
+                <div className="flex items-center justify-between space-x-2 mb-1">
+                  <h3 className="font-bold text-lg">Principal Security Consultant</h3>
+                  <time className="font-semibold text-primary flex items-center">
+                    <Calendar className="h-4 w-4 mr-1" />
+                    2018 - Present
+                  </time>
+                </div>
+                <p className="text-muted-foreground mb-2">CyberShield Consulting</p>
+                <p className="text-sm text-muted-foreground">
+                  Leading complex security assessments and penetration tests for Fortune 500 clients. Developing custom
+                  security frameworks and methodologies. Mentoring junior security consultants and delivering executive
+                  briefings on critical security findings.
+                </p>
+              </div>
+            </div>
+
+            <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+              <div className="flex items-center justify-center w-10 h-10 rounded-full border border-primary/20 bg-background shadow-sm z-10 md:group-odd:ml-8 md:group-even:mr-8">
+                <Briefcase className="h-5 w-5 text-primary" />
+              </div>
+              <div className="w-full md:w-[calc(50%-4rem)] bg-background p-5 rounded-lg border border-primary/20 shadow-sm">
+                <div className="flex items-center justify-between space-x-2 mb-1">
+                  <h3 className="font-bold text-lg">Senior Security Engineer</h3>
+                  <time className="font-semibold text-primary flex items-center">
+                    <Calendar className="h-4 w-4 mr-1" />
+                    2014 - 2018
+                  </time>
+                </div>
+                <p className="text-muted-foreground mb-2">SecureTech Solutions</p>
+                <p className="text-sm text-muted-foreground">
+                  Designed and implemented security architectures for cloud migrations. Led vulnerability management
+                  program and security operations center (SOC) initiatives. Conducted internal security assessments and
+                  developed remediation strategies.
+                </p>
+              </div>
+            </div>
+
+            <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+              <div className="flex items-center justify-center w-10 h-10 rounded-full border border-primary/20 bg-background shadow-sm z-10 md:group-odd:ml-8 md:group-even:mr-8">
+                <Briefcase className="h-5 w-5 text-primary" />
+              </div>
+              <div className="w-full md:w-[calc(50%-4rem)] bg-background p-5 rounded-lg border border-primary/20 shadow-sm">
+                <div className="flex items-center justify-between space-x-2 mb-1">
+                  <h3 className="font-bold text-lg">Security Analyst</h3>
+                  <time className="font-semibold text-primary flex items-center">
+                    <Calendar className="h-4 w-4 mr-1" />
+                    2010 - 2014
+                  </time>
+                </div>
+                <p className="text-muted-foreground mb-2">Global Financial Services</p>
+                <p className="text-sm text-muted-foreground">
+                  Performed security monitoring and incident response for a major financial institution. Conducted
+                  vulnerability assessments and security awareness training. Assisted in developing security policies
+                  and procedures.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
-
-      {/* Professional experience removed to reflect current student status */}
     </div>
   )
 }
