@@ -1,0 +1,11 @@
+To add your profile photo to the website:
+
+1. Save the image you attached as `profile.jpg`.
+2. Place the file at: public/profile.jpg in the project root.
+
+On Windows, you can right-click the image shown in our chat -> Save as -> select:
+C:\Users\<your-user>\OneDrive\Desktop\eca portfolio\my-digital-portfolio\public\profile.jpg
+
+After placing the image, run the dev server (pnpm dev) and visit /about to see it.
+
+If you want, I can add the image for you — upload the image file directly into the workspace (drag into the repository) or tell me to proceed and I'll attempt to add it if available in attachments.
