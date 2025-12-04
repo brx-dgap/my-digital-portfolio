@@ -12,8 +12,8 @@ export default function AboutPage() {
             <div className="space-y-2">
               <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl text-white">About Me</h1>
               <p className="max-w-[700px] text-gray-400 md:text-xl/relaxed">
-                Cybersecurity professional with over 15 years of experience protecting organizations from evolving
-                threats.
+                2nd year student building skills in AI security, web development, and leadership—focused on
+                hardening AI agents and creating secure, production-ready portfolios.
               </p>
             </div>
           </div>
@@ -29,29 +29,21 @@ export default function AboutPage() {
           <div className="grid gap-10 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_500px]">
             <div className="flex flex-col justify-center space-y-6">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">John Smith</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Brix Digap</h2>
                 <p className="text-xl text-muted-foreground">
-                  <span className="text-primary font-semibold">Cybersecurity Consultant & Penetration Tester</span>
+                  <span className="text-primary font-semibold">Student • AI & Security Enthusiast</span>
                 </p>
               </div>
               <div className="space-y-4">
                 <p className="text-muted-foreground">
-                  I am a dedicated cybersecurity professional with a passion for helping organizations strengthen their
-                  security posture and protect their valuable digital assets. With over 15 years of experience in the
-                  industry, I have worked with clients across various sectors, from financial services and healthcare to
-                  government and technology.
+                  I’m a 2nd year student learning practical AI security and full-stack development. I focus on secure
+                  development workflows, threat-aware design, and building portfolio projects that demonstrate
+                  defensible production patterns.
                 </p>
                 <p className="text-muted-foreground">
-                  My approach combines technical expertise with a deep understanding of business needs, allowing me to
-                  develop security solutions that are both effective and practical. I believe that cybersecurity is not
-                  just about implementing technical controls, but also about building a culture of security awareness
-                  and resilience.
-                </p>
-                <p className="text-muted-foreground">
-                  Throughout my career, I have helped organizations identify and address security vulnerabilities,
-                  implement robust security programs, and respond effectively to security incidents. I am committed to
-                  staying at the forefront of the rapidly evolving cybersecurity landscape and sharing my knowledge with
-                  clients and the broader security community.
+                  While I’m still early in my professional journey, I’ve taken part in competitions and leadership roles
+                  that combine technology and teamwork. I enjoy applying hands-on security practices to projects and
+                  documenting clear, actionable findings.
                 </p>
               </div>
             </div>
@@ -61,7 +53,7 @@ export default function AboutPage() {
                 <div className="relative overflow-hidden rounded-xl border border-primary/20 bg-background p-2">
                   <Image
                     src="/cyber-guardian.png"
-                    alt="John Smith - Cybersecurity Professional"
+                    alt="Brix Digap - Student"
                     width={500}
                     height={500}
                     className="rounded-lg object-cover w-full h-full"
@@ -239,6 +231,46 @@ export default function AboutPage() {
                   <CheckCircle className="h-4 w-4 text-primary" />
                   <span>Breach Containment & Recovery</span>
                 </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* AI Protector Workshop */}
+      <section className="w-full py-12 md:py-24 lg:py-32 bg-muted/20">
+        <div className="container px-4 md:px-6">
+          <div className="flex flex-col items-center justify-center space-y-4 text-center mb-10">
+            <div className="space-y-2">
+              <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary">Workshop</div>
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">AI Protector Workshop</h2>
+              <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed">
+                I’m Brix Digap, a 2nd year student who completed the AI Protector Workshop — a 10-week security-first
+                program focused on hardening AI agents, MCP servers, and digital portfolios.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            <div>
+              <p className="text-muted-foreground mb-4">
+                The workshop covered layered defenses, threat modeling, WAF and Arcjet integrations, Kali Linux
+                penetration testing, and OAuth-secured MCP workflows. I practiced secure development workflows,
+                secure coding patterns, and produced portfolio-ready security documentation.
+              </p>
+              <p className="text-muted-foreground mb-4">
+                Contact: <a href="mailto:digapbrix@gmail.com" className="text-primary font-medium">digapbrix@gmail.com</a>
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-bold mb-2">Skills & Deliverables from the Workshop</h3>
+              <ul className="list-disc list-inside text-muted-foreground space-y-2">
+                <li>Secure development and environment hardening (Node.js, Next.js)</li>
+                <li>Threat modeling and repeatable penetration testing workflows (Kali Linux)</li>
+                <li>MCP server hardening and OAuth 2.1 authentication patterns</li>
+                <li>WAF and edge protections (Vercel, Arcjet) for production readiness</li>
+                <li>Executive-ready security reporting and incident runbooks</li>
               </ul>
             </div>
           </div>
