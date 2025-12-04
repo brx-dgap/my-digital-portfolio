@@ -21,6 +21,7 @@ export default function Navbar() {
     { href: "/about", label: "About" },
     { href: "/blog", label: "Blog" },
     { href: "/projects", label: "Projects" },
+    { href: "/security-plan", label: "Security" },
   ];
   
   const adminLink = { 
