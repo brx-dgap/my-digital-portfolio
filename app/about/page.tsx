@@ -12,8 +12,9 @@ export default function AboutPage() {
             <div className="space-y-2">
               <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl text-white">About Me</h1>
               <p className="max-w-[700px] text-gray-400 md:text-xl/relaxed">
-                Cybersecurity professional with over 15 years of experience protecting organizations from evolving
-                threats.
+                I’m Brix Digap — a 2nd‑year student and emerging AI security practitioner focused on hardening AI
+                agents, MCP servers, and secure portfolios. I’m building practical, portfolio-ready security skills
+                through hands-on workshops and projects.
               </p>
             </div>
           </div>
@@ -29,29 +30,25 @@ export default function AboutPage() {
           <div className="grid gap-10 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_500px]">
             <div className="flex flex-col justify-center space-y-6">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">John Smith</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Brix Digap</h2>
                 <p className="text-xl text-muted-foreground">
-                  <span className="text-primary font-semibold">Cybersecurity Consultant & Penetration Tester</span>
+                  <span className="text-primary font-semibold">2nd‑Year Student • AI Protector Workshop Participant</span>
                 </p>
               </div>
               <div className="space-y-4">
                 <p className="text-muted-foreground">
-                  I am a dedicated cybersecurity professional with a passion for helping organizations strengthen their
-                  security posture and protect their valuable digital assets. With over 15 years of experience in the
-                  industry, I have worked with clients across various sectors, from financial services and healthcare to
-                  government and technology.
+                  I completed the AI Protector Workshop — a 10‑week, security‑first program that taught secure AI
+                  development lifecycles, layered defenses (WAF, Arcjet, Vercel Firewall), MCP authentication (OAuth 2.1),
+                  and practical offensive testing with Kali Linux. The workshop equipped me to evaluate and defend AI
+                  systems from development through production.
                 </p>
                 <p className="text-muted-foreground">
-                  My approach combines technical expertise with a deep understanding of business needs, allowing me to
-                  develop security solutions that are both effective and practical. I believe that cybersecurity is not
-                  just about implementing technical controls, but also about building a culture of security awareness
-                  and resilience.
+                  I’m focused on applying these skills to real projects and building a security‑first portfolio. Below are
+                  some of the technical skills I practice and the achievements that reflect my leadership and tech
+                  experience.
                 </p>
                 <p className="text-muted-foreground">
-                  Throughout my career, I have helped organizations identify and address security vulnerabilities,
-                  implement robust security programs, and respond effectively to security incidents. I am committed to
-                  staying at the forefront of the rapidly evolving cybersecurity landscape and sharing my knowledge with
-                  clients and the broader security community.
+                  Contact: digapbrix@gmail.com
                 </p>
               </div>
             </div>
@@ -60,8 +57,8 @@ export default function AboutPage() {
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full blur-3xl opacity-20"></div>
                 <div className="relative overflow-hidden rounded-xl border border-primary/20 bg-background p-2">
                   <Image
-                    src="/cyber-guardian.png"
-                    alt="John Smith - Cybersecurity Professional"
+                    src="/profile.jpg"
+                    alt="Brix Digap"
                     width={500}
                     height={500}
                     className="rounded-lg object-cover w-full h-full"
@@ -78,11 +75,11 @@ export default function AboutPage() {
         <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center mb-10">
             <div className="space-y-2">
-              <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary">Credentials</div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Certifications & Education</h2>
-              <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed">
-                Professional qualifications and academic background that inform my expertise.
-              </p>
+                <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary">Achievements</div>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Awards & Recognition</h2>
+                <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed">
+                  Selected accomplishments and leadership roles showcasing technical curiosity and community impact.
+                </p>
             </div>
           </div>
 
@@ -92,13 +89,11 @@ export default function AboutPage() {
                 <div className="bg-primary/10 p-3 w-fit rounded-lg mb-4">
                   <Award className="h-6 w-6 text-primary" />
                 </div>
-                <CardTitle>CISSP</CardTitle>
-                <CardDescription>Certified Information Systems Security Professional</CardDescription>
+                <CardTitle>With Honors</CardTitle>
+                <CardDescription>Academic recognition for strong performance</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Globally recognized certification demonstrating expertise across eight security domains.
-                </p>
+                <p className="text-sm text-muted-foreground">Dean's Lister (2024, 2025) and consistent academic honors.</p>
               </CardContent>
             </Card>
 
@@ -107,28 +102,11 @@ export default function AboutPage() {
                 <div className="bg-primary/10 p-3 w-fit rounded-lg mb-4">
                   <Award className="h-6 w-6 text-primary" />
                 </div>
-                <CardTitle>OSCP</CardTitle>
-                <CardDescription>Offensive Security Certified Professional</CardDescription>
+                <CardTitle>Awards & Competitions</CardTitle>
+                <CardDescription>Technical & innovation recognitions</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Hands-on penetration testing certification proving practical exploitation skills.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-background border-primary/20">
-              <CardHeader className="pb-2">
-                <div className="bg-primary/10 p-3 w-fit rounded-lg mb-4">
-                  <Award className="h-6 w-6 text-primary" />
-                </div>
-                <CardTitle>CCSP</CardTitle>
-                <CardDescription>Certified Cloud Security Professional</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Specialized certification in cloud security architecture, design, and operations.
-                </p>
+                <p className="text-sm text-muted-foreground">Best in Coding; Most Innovative Science Project; Agri Tech Innovate Top 3 Regionals & Top 12 Nationals.</p>
               </CardContent>
             </Card>
 
@@ -137,13 +115,24 @@ export default function AboutPage() {
                 <div className="bg-primary/10 p-3 w-fit rounded-lg mb-4">
                   <GraduationCap className="h-6 w-6 text-primary" />
                 </div>
-                <CardTitle>M.S. Cybersecurity</CardTitle>
-                <CardDescription>Stanford University</CardDescription>
+                <CardTitle>Leadership & Service</CardTitle>
+                <CardDescription>Student leadership roles and community involvement</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Advanced degree with focus on security architecture and threat intelligence.
-                </p>
+                <p className="text-sm text-muted-foreground">Social Media Director, Environmental Chairman, PYAP Officer, Socio‑Cultural Coordinator, SMS Chairman.</p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-background border-primary/20">
+              <CardHeader className="pb-2">
+                <div className="bg-primary/10 p-3 w-fit rounded-lg mb-4">
+                  <Award className="h-6 w-6 text-primary" />
+                </div>
+                <CardTitle>Community & Participation</CardTitle>
+                <CardDescription>Hackathons & events</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">App Con (2024–2025), Start Up Challenge (2025), International Work Immersion Award (2023–2024).</p>
               </CardContent>
             </Card>
           </div>
@@ -158,86 +147,62 @@ export default function AboutPage() {
               <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary">Expertise</div>
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Skills & Specializations</h2>
               <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed">
-                Core competencies and specialized knowledge areas in cybersecurity.
+                Technical skills I practiced during the AI Protector Workshop and in my projects.
               </p>
             </div>
           </div>
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             <div className="space-y-4">
-              <h3 className="text-xl font-bold">Penetration Testing</h3>
+              <h3 className="text-xl font-bold">Secure Development</h3>
               <ul className="space-y-2">
                 <li className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-primary" />
-                  <span>Web Application Testing</span>
+                  <span>Environment hardening & secrets management</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-primary" />
-                  <span>Network Infrastructure Testing</span>
+                  <span>Secure Node.js & VS Code setups</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-primary" />
-                  <span>Mobile Application Testing</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-primary" />
-                  <span>Social Engineering Assessments</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-primary" />
-                  <span>Red Team Operations</span>
+                  <span>Secure SDLC basics for AI projects</span>
                 </li>
               </ul>
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-xl font-bold">Security Architecture</h3>
+              <h3 className="text-xl font-bold">Agent & MCP Security</h3>
               <ul className="space-y-2">
                 <li className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-primary" />
-                  <span>Zero Trust Architecture</span>
+                  <span>Threat modeling for MCP servers and AI agents</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-primary" />
-                  <span>Cloud Security Design</span>
+                  <span>OAuth 2.1 integration & access controls</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-primary" />
-                  <span>Network Security Design</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-primary" />
-                  <span>Identity & Access Management</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-primary" />
-                  <span>Secure SDLC Implementation</span>
+                  <span>WAF & edge protection basics (Vercel, Arcjet)</span>
                 </li>
               </ul>
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-xl font-bold">Incident Response</h3>
+              <h3 className="text-xl font-bold">Testing & Reporting</h3>
               <ul className="space-y-2">
                 <li className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-primary" />
-                  <span>Digital Forensics</span>
+                  <span>Penetration testing fundamentals (Kali Linux workflows)</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-primary" />
-                  <span>Malware Analysis</span>
+                  <span>Executive-ready security summaries and runbooks</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-primary" />
-                  <span>Threat Hunting</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-primary" />
-                  <span>Incident Response Planning</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-primary" />
-                  <span>Breach Containment & Recovery</span>
+                  <span>Presentation and collaboration for portfolio delivery</span>
                 </li>
               </ul>
             </div>
