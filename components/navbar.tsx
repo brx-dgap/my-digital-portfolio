@@ -11,6 +11,12 @@ import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@cl
 import { cn } from "@/lib/utils";
 import { useAdmin } from "@/hooks/use-admin";
 
+interface NavLink {
+  href: string;
+  label: string;
+  requiresAuth?: boolean;
+}
+
 export default function Navbar() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,6 +28,7 @@ export default function Navbar() {
     { href: "/blog", label: "Blog" },
     { href: "/projects", label: "Projects" },
     { href: "/security-plan", label: "Security" },
+    { href: "/security-journal", label: "Security Journal", requiresAuth: true },
   ];
   
   const adminLink = { 
@@ -40,17 +47,37 @@ export default function Navbar() {
         </div>        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-5 text-sm font-medium">
           {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "transition-colors hover:text-foreground/80",
-                pathname === link.href ? "text-foreground" : "text-foreground/60"
-              )}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {link.label}
-            </Link>
+            // Only show auth-required links if user is signed in
+            <SignedIn key={link.href} fallback={!link.requiresAuth ? <></> : null}>
+              {link.requiresAuth ? (
+                <Link
+                  href={link.href}
+                  className={cn(
+                    "transition-colors hover:text-foreground/80",
+                    pathname === link.href ? "text-foreground" : "text-foreground/60"
+                  )}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ) : null}
+            </SignedIn>
+          ))}
+          {navLinks.map((link) => (
+            // Show non-auth links
+            !link.requiresAuth ? (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "transition-colors hover:text-foreground/80",
+                  pathname === link.href ? "text-foreground" : "text-foreground/60"
+                )}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ) : null
           ))}
         </nav>
 
@@ -66,16 +93,34 @@ export default function Navbar() {
             </SheetTrigger>
             <SheetContent side="right" className="w-full max-w-xs">
               <nav className="flex flex-col gap-4 mt-8">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+                {navLinks.map((link) => 
+                  !link.requiresAuth ? (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  ) : null
+                )}
+                
+                {/* Add Security Journal link for signed-in users */}
+                <SignedIn>
+                  {navLinks.map((link) =>
+                    link.requiresAuth ? (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {link.label}
+                      </Link>
+                    ) : null
+                  )}
+                </SignedIn>
                 
                 {/* Add Admin link in mobile menu */}
                 {isAdmin && (
