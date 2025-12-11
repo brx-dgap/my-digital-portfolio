@@ -4,12 +4,10 @@ import { NextResponse } from "next/server";
 /**
  * Protected routes that require user authentication
  * Users must be signed in with Clerk to access these routes
+ * TEMPORARILY DISABLED FOR DEBUGGING
  */
 const isProtectedRoute = createRouteMatcher([
-  '/admin(.*)',
-  '/resources(.*)',
-  '/projects(.*)',
-  '/security-journal(.*)',
+  // Temporarily disabled to debug auth loop issues
 ]);
 
 /**
@@ -21,10 +19,10 @@ const isAdminRoute = createRouteMatcher([
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
-  // Protect routes that require authentication
-  if (isProtectedRoute(req)) {
-    await auth.protect();
-  }
+  // Route protection temporarily disabled - testing site without auth
+  // if (isProtectedRoute(req)) {
+  //   await auth.protect();
+  // }
   
   // Note: Admin role checking is done at the page/component level using isAdmin()
   // This keeps the middleware focused on authentication
