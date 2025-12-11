@@ -22,12 +22,13 @@ interface JournalEntry {
   userId: string;
   link: string;
   lesson: string;
-  submissionCategory?: string;
-  submissionDate?: Date;
-  requirementsMet?: string[];
-  notes?: string;
-  status?: string;
-  createdAt?: Date;
+  submissionCategory: string | null;
+  submissionDate: Date;
+  requirementsMet: unknown;
+  notes: string | null;
+  status: string | null;
+  createdAt: Date;
+  updatedAt: Date | null;
 }
 
 const categories = [
@@ -116,12 +117,12 @@ export default function JournalEntries({ userId }: { userId: string }) {
     return true;
   });
 
-  const getCategoryBadge = (cat?: string) => {
+  const getCategoryBadge = (cat: string | null) => {
     const categoryObj = categories.find(c => c.value === cat);
     return categoryObj?.label || "Uncategorized";
   };
 
-  const getStatusColor = (status?: string) => {
+  const getStatusColor = (status: string | null) => {
     switch (status) {
       case "completed":
         return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100";
@@ -340,16 +341,16 @@ export default function JournalEntries({ userId }: { userId: string }) {
                     </div>
                   )}
 
-                  {entry.requirementsMet && entry.requirementsMet.length > 0 && (
+                  {entry.requirementsMet && Array.isArray(entry.requirementsMet) && (entry.requirementsMet as unknown[]).length > 0 ? (
                     <div className="flex items-start gap-2 pt-2 border-t">
                       <CheckCircle className="h-4 w-4 text-green-600 mt-1 flex-shrink-0" />
                       <div className="text-sm">
                         <p className="font-medium text-green-700 dark:text-green-400">
-                          {entry.requirementsMet.length} requirements met
+                          {(entry.requirementsMet as unknown[]).length} requirements met
                         </p>
                       </div>
                     </div>
-                  )}
+                  ) : null}
                 </CardContent>
               </Card>
             ))}
