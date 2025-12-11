@@ -5,10 +5,18 @@ import { journalEntries } from "@/lib/journal-schema";
 import { eq } from "drizzle-orm";
 
 /**
- * Get all journal entries for a user
+ * Get all journal entries for a user or all entries (admin)
  */
 export async function getJournalEntries(userId: string) {
   try {
+    // If userId is empty, get all entries (admin view)
+    if (!userId) {
+      return await db
+        .select()
+        .from(journalEntries)
+        .orderBy(journalEntries.createdAt.desc());
+    }
+    // Otherwise get user's entries
     return await db
       .select()
       .from(journalEntries)

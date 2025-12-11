@@ -1,9 +1,11 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import JournalEntries from "@/components/journal-entries";
+import AdminJournalReview from "@/components/admin-journal-review";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AlertCircle, CheckCircle, Clock, FileText } from "lucide-react";
+import { isAdmin } from "@/lib/auth";
 
 /**
  * Security Journal - Week 3 Submission Requirements
@@ -17,6 +19,8 @@ export default async function SecurityJournalPage() {
   if (!user) {
     redirect("/sign-in");
   }
+
+  const adminStatus = await isAdmin();
 
   // Mini project definitions with requirements
   const miniProjects = [
@@ -175,9 +179,10 @@ export default async function SecurityJournalPage() {
       </div>
 
       <Tabs defaultValue="projects" className="w-full">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="projects">Mini Projects</TabsTrigger>
+        <TabsList className={`grid w-full ${adminStatus ? "grid-cols-3" : "grid-cols-2"}`}>
+          <TabsTrigger value="projects">Projects</TabsTrigger>
           <TabsTrigger value="submissions">My Submissions</TabsTrigger>
+          {adminStatus && <TabsTrigger value="admin">Admin Review</TabsTrigger>}
         </TabsList>
 
         <TabsContent value="projects" className="space-y-6">
@@ -285,6 +290,22 @@ export default async function SecurityJournalPage() {
             </CardContent>
           </Card>
         </TabsContent>
+
+        {adminStatus && (
+          <TabsContent value="admin" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Admin: Submission Review</CardTitle>
+                <CardDescription>
+                  Review and manage all student submissions
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <AdminJournalReview />
+              </CardContent>
+            </Card>
+          </TabsContent>
+        )}
       </Tabs>
 
       {/* Submission Requirements Info */}
