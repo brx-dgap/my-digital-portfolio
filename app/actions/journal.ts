@@ -28,7 +28,8 @@ export async function addJournalEntry(
   link: string,
   lesson: string,
   submissionCategory: string = "mini-project",
-  notes: string = ""
+  notes: string = "",
+  miniProject: string = ""
 ) {
   try {
     const [entry] = await db
@@ -41,7 +42,7 @@ export async function addJournalEntry(
         notes: notes || null,
         status: "submitted",
         submissionDate: new Date(),
-        requirementsMet: [],
+        requirementsMet: miniProject ? [miniProject] : [],
       })
       .returning();
     return entry;

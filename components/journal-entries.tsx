@@ -38,6 +38,16 @@ const categories = [
   { value: "challenge", label: "Challenge" },
 ];
 
+const miniProjects = [
+  { value: "authentication", label: "Authentication & Authorization" },
+  { value: "environment", label: "Secure Environment Variables" },
+  { value: "storage", label: "Vercel Storage Integration" },
+  { value: "migrations", label: "Drizzle ORM Migrations" },
+  { value: "security-logging", label: "Deployment Security & Logging" },
+  { value: "custom-domain", label: "Custom Domain Configuration" },
+  { value: "journal", label: "Security Journal Implementation" },
+];
+
 const statusOptions = [
   { value: "submitted", label: "Submitted" },
   { value: "reviewed", label: "Under Review" },
@@ -51,6 +61,7 @@ export default function JournalEntries({ userId }: { userId: string }) {
   const [lesson, setLesson] = useState("");
   const [notes, setNotes] = useState("");
   const [category, setCategory] = useState<string>("mini-project");
+  const [miniProject, setMiniProject] = useState<string>("");
   const [loading, setLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [filterCategory, setFilterCategory] = useState<string | null>(null);
@@ -80,17 +91,22 @@ export default function JournalEntries({ userId }: { userId: string }) {
       setError("Please fill in both link and lesson fields");
       return;
     }
+    if (category === "mini-project" && !miniProject) {
+      setError("Please select a mini project");
+      return;
+    }
 
     try {
       setIsSubmitting(true);
       setError(null);
-      const newEntry = await addJournalEntry(userId, link, lesson, category, notes);
+      const newEntry = await addJournalEntry(userId, link, lesson, category, notes, miniProject);
       if (newEntry) {
         setEntries([newEntry, ...entries]);
         setLink("");
         setLesson("");
         setNotes("");
         setCategory("mini-project");
+        setMiniProject("");
       }
     } catch (err) {
       setError("Failed to add entry");
@@ -189,6 +205,25 @@ export default function JournalEntries({ userId }: { userId: string }) {
                 </Select>
               </div>
             </div>
+
+            {/* Mini Project selector - only show for mini-project category */}
+            {category === "mini-project" && (
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Mini Project *</label>
+                <Select value={miniProject} onValueChange={setMiniProject}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select which mini project this submission is for" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {miniProjects.map((project) => (
+                      <SelectItem key={project.value} value={project.value}>
+                        {project.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
 
             <div className="space-y-2">
               <label className="text-sm font-medium">Lesson Learned</label>
