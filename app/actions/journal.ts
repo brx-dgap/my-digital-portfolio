@@ -1,3 +1,5 @@
+"use server";
+
 import { db } from "@/lib/db";
 import { journalEntries } from "@/lib/journal-schema";
 import { eq } from "drizzle-orm";
