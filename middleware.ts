@@ -1,14 +1,22 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 /**
- * Minimal middleware - Clerk authentication temporarily disabled
- * This is a debug version to test if Clerk is causing redirect loops
+ * Protected routes that require user authentication
+ * Users must be signed in with Clerk to access these routes
  */
-export function middleware(request: NextRequest) {
-  // Just pass through for now - no authentication required
-  return NextResponse.next();
-}
+const isProtectedRoute = createRouteMatcher([
+  '/admin(.*)',
+  '/resources(.*)',
+  '/projects(.*)',
+  '/security-journal(.*)',
+]);
+
+export default clerkMiddleware(async (auth, req) => {
+  // Protect routes that require authentication
+  if (isProtectedRoute(req)) {
+    await auth.protect();
+  }
+});
 
 export const config = {
   matcher: [
