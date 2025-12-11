@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer";
 import { Toaster } from "@/components/ui/sonner";
 import { ClerkProvider } from "@clerk/nextjs";
 import { AuthSync } from "@/components/auth-sync";
+import PageProtection from "@/components/page-protection";
 // import {
 //   SignInButton,
 //   SignUpButton,
@@ -32,6 +33,8 @@ export default function RootLayout({
     <ClerkProvider>
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
+        {/* Page Protection - Prevent right-click and inspect element */}
+        <PageProtection />
         {/* Include AuthSync component for auto user role assignment */}
         <AuthSync />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
