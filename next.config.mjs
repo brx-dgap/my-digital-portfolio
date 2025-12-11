@@ -39,16 +39,6 @@ const nextConfig = {
       },
     ]
   },
-  // Redirect HTTP to HTTPS in production
-  async redirects() {
-    return [
-      {
-        source: '/:path*',
-        destination: '/:path*',
-        permanent: false,
-      }
-    ]
-  }
 }
 
 export default nextConfig
