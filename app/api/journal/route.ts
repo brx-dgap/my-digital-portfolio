@@ -1,7 +1,17 @@
 import { NextResponse } from 'next/server';
 import { getJournalEntries, addJournalEntry } from '@/app/actions/journal';
+import { aj } from '@/lib/arcjet-config';
 
 export async function GET(req: Request) {
+  // Arcjet protection
+  const decision = await aj.protect(req);
+  if (decision.isDenied()) {
+    if (decision.reason.isRateLimit()) {
+      return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+    }
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+  }
+
   try {
     const url = new URL(req.url);
     const userId = url.searchParams.get('userId');
@@ -15,6 +25,15 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
+  // Arcjet protection
+  const decision = await aj.protect(req);
+  if (decision.isDenied()) {
+    if (decision.reason.isRateLimit()) {
+      return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+    }
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+  }
+
   try {
     const body = await req.json();
     const { userId, link, lesson } = body || {};
