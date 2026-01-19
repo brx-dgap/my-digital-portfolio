@@ -137,23 +137,32 @@ export function CatRobotFollower() {
         />
         
         {/* Three Cyan Pupils (Moving) */}
-        {/* Left Pupil */}
-        <path
-          d="M ${115 + eyePosition.x * 0.4} ${165 + eyePosition.y * 0.4} Q ${105 + eyePosition.x * 0.4} ${155 + eyePosition.y * 0.4} ${115 + eyePosition.x * 0.4} ${145 + eyePosition.y * 0.4} Q ${125 + eyePosition.x * 0.4} ${155 + eyePosition.y * 0.4} ${115 + eyePosition.x * 0.4} ${165 + eyePosition.y * 0.4} Z"
+        {/* Left Pupil - Arc shape */}
+        <ellipse
+          cx={115 + eyePosition.x * 0.4}
+          cy={160 + eyePosition.y * 0.4}
+          rx="18"
+          ry="22"
           fill="url(#pupilGlow)"
           filter="url(#glow)"
         />
         
-        {/* Center Pupil */}
-        <path
-          d="M ${170 + eyePosition.x * 0.4} ${170 + eyePosition.y * 0.4} Q ${160 + eyePosition.x * 0.4} ${160 + eyePosition.y * 0.4} ${170 + eyePosition.x * 0.4} ${150 + eyePosition.y * 0.4} Q ${180 + eyePosition.x * 0.4} ${160 + eyePosition.y * 0.4} ${170 + eyePosition.x * 0.4} ${170 + eyePosition.y * 0.4} Z"
+        {/* Center Pupil - Arc shape */}
+        <ellipse
+          cx={170 + eyePosition.x * 0.4}
+          cy={165 + eyePosition.y * 0.4}
+          rx="18"
+          ry="22"
           fill="url(#pupilGlow)"
           filter="url(#glow)"
         />
         
-        {/* Right Pupil */}
-        <path
-          d="M ${225 + eyePosition.x * 0.4} ${165 + eyePosition.y * 0.4} Q ${215 + eyePosition.x * 0.4} ${155 + eyePosition.y * 0.4} ${225 + eyePosition.x * 0.4} ${145 + eyePosition.y * 0.4} Q ${235 + eyePosition.x * 0.4} ${155 + eyePosition.y * 0.4} ${225 + eyePosition.x * 0.4} ${165 + eyePosition.y * 0.4} Z"
+        {/* Right Pupil - Arc shape */}
+        <ellipse
+          cx={225 + eyePosition.x * 0.4}
+          cy={160 + eyePosition.y * 0.4}
+          rx="18"
+          ry="22"
           fill="url(#pupilGlow)"
           filter="url(#glow)"
         />
