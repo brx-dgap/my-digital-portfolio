@@ -54,10 +54,6 @@ export const ajStrict = arcjet({
     shield({
       mode: "LIVE",
     }),
-    detectBot({
-      mode: "LIVE",
-      allow: [], // Don't allow any bots on sensitive endpoints
-    }),
     // Stricter rate limiting for API endpoints
     tokenBucket({
       mode: "LIVE",
