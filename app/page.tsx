@@ -7,7 +7,6 @@ import { NewsletterForm } from "@/components/newsletter-form"
 import { db, blogPosts } from "@/lib/db"
 import { formatDate } from "@/lib/utils"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { CatRobotFollower } from "@/components/cat-robot-follower"
 import { SimpleChatbot } from "@/components/simple-chatbot"
 
 export default async function Home() {
@@ -62,9 +61,31 @@ export default async function Home() {
             </div>
             <div className="flex items-center justify-center">
               <div className="relative w-full max-w-[500px] aspect-square">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full blur-3xl opacity-20 animate-pulse"></div>
-                <div className="relative h-full flex items-center justify-center">
-                  <CatRobotFollower />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+                <div className="relative bg-black/40 backdrop-blur-sm border border-white/10 p-6 rounded-2xl shadow-2xl">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2 col-span-2">
+                      <div className="h-2 w-[80%] bg-primary/20 rounded-full"></div>
+                      <div className="h-2 w-[60%] bg-primary/20 rounded-full"></div>
+                    </div>
+                    <div className="h-20 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <Lock className="h-8 w-8 text-primary" />
+                    </div>
+                    <div className="h-20 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <Shield className="h-8 w-8 text-primary" />
+                    </div>
+                    <div className="h-20 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <Server className="h-8 w-8 text-primary" />
+                    </div>
+                    <div className="h-20 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <Database className="h-8 w-8 text-primary" />
+                    </div>
+                    <div className="space-y-2 col-span-2 mt-2">
+                      <div className="h-2 w-[70%] bg-primary/20 rounded-full"></div>
+                      <div className="h-2 w-[50%] bg-primary/20 rounded-full"></div>
+                    </div>
+                  </div>
+                  <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-2/3 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
                 </div>
               </div>
             </div>
