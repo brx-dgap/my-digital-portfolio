@@ -1,13 +1,12 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
-import { ajMinimal } from "@/lib/arcjet-config";
 
 /**
  * Protected routes that require user authentication
  * Users must be signed in with Clerk to access these routes
  * 
- * Arcjet minimal protection (shield only) applied to all routes.
- * Full protection (shield + rate limiting + bot detection) in API routes.
+ * Note: Arcjet protection is in API routes only due to Vercel Edge Function
+ * 1 MB size limit. Even minimal shield-only config exceeds this limit.
+ * See lib/arcjet-config.ts for API route protection.
  */
 const isProtectedRoute = createRouteMatcher([
   '/admin(.*)',
@@ -17,26 +16,7 @@ const isProtectedRoute = createRouteMatcher([
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
-  // Apply minimal Arcjet protection (shield only - keeps bundle small)
-  const decision = await ajMinimal.protect(req);
-  
-  // Handle Arcjet errors gracefully - fail open
-  for (const result of decision.results) {
-    if (result.reason.isError()) {
-      console.warn('Arcjet middleware error:', result.reason.message);
-      // Continue processing even if Arcjet has an error
-    }
-  }
-  
-  // Block if Arcjet denies the request
-  if (decision.isDenied()) {
-    return NextResponse.json(
-      { error: 'Access denied. Request blocked by security protection.' },
-      { status: 403 }
-    );
-  }
-  
-  // Then protect routes that require authentication
+  // Protect routes that require authentication
   if (isProtectedRoute(req)) {
     await auth.protect();
   }
