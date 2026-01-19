@@ -47,20 +47,12 @@ export const aj = arcjet({
   ],
 });
 
-// Strict protection for API routes and admin pages - More aggressive rate limiting
+// Strict protection for API routes - SIMPLE CONFIG THAT WORKS
 export const ajStrict = arcjet({
   key: process.env.ARCJET_KEY!,
   rules: [
     shield({
       mode: "LIVE",
-    }),
-    // Stricter rate limiting for API endpoints
-    tokenBucket({
-      mode: "LIVE",
-      characteristics: ["ip"],
-      refillRate: 5, // 5 tokens per interval
-      interval: 10, // every 10 seconds
-      capacity: 20, // smaller bucket capacity
     }),
   ],
 });
