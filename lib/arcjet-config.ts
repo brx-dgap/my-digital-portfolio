@@ -9,6 +9,17 @@ import arcjet, { shield, tokenBucket, detectBot } from "@arcjet/next";
  * Bot Detection: Identifies and blocks malicious bots
  */
 
+// Minimal protection for middleware - Shield only (to stay under Edge Function size limit)
+export const ajMinimal = arcjet({
+  key: process.env.ARCJET_KEY!,
+  rules: [
+    // Only shield protection - smallest bundle size
+    shield({
+      mode: "LIVE",
+    }),
+  ],
+});
+
 // Base protection for all routes - Shield + Bot detection + Basic rate limiting
 export const aj = arcjet({
   key: process.env.ARCJET_KEY!,
