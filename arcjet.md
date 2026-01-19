@@ -1,9 +1,11 @@
 # Arcjet Implementation for Next.js 15
 
 ## Overview
-This project implements Arcjet security protection with a **hybrid approach** for Next.js 15 App Router:
-- **Middleware:** Minimal protection (shield only) to stay under Vercel's 1 MB Edge Function limit
-- **API Routes:** Full protection (shield + rate limiting + bot detection)
+This project implements Arcjet security protection for **API routes only** in Next.js 15 App Router:
+- **Middleware:** Clerk authentication only (optimized for Vercel Edge Function 1 MB limit)
+- **API Routes:** Full Arcjet protection (shield + rate limiting + bot detection)
+
+**Note:** Even minimal Arcjet configuration (shield-only) exceeds Vercel's free tier 1 MB Edge Function limit. API-route protection is the optimal solution for this constraint.
 
 ## Documentation References
 - [Arcjet Get Started with Next.js](https://docs.arcjet.com/get-started?f-next-js)
@@ -14,36 +16,39 @@ This project implements Arcjet security protection with a **hybrid approach** fo
 
 ## Implementation Details
 
-### Hybrid Architecture (Best of Both Worlds)
+### API-Only Architecture (Vercel Optimized)
 
 **Middleware Layer (All Routes):**
-- ✅ Shield protection against attacks (SQL injection, XSS, etc.)
-- ⚠️ No rate limiting (keeps bundle small)
-- ⚠️ No bot detection (keeps bundle small)
-- Bundle size: Optimized to stay under 1 MB
+- ✅ Clerk authentication for protected pages
+- ⚠️ No Arcjet (even shield-only is 1.03 MB, exceeds 1 MB limit)
+- Bundle size: ~142 KB (well under 1 MB limit)
+- ✅ Deploys successfully on Vercel free tier
 
 **API Route Layer:**
-- ✅ Shield protection
-- ✅ Rate limiting (prevents abuse)
-- ✅ Bot detection
-- No size constraints (Node.js runtime)
+- ✅ Full Arcjet protection with `ajStrict`
+- ✅ Shield protection (SQL injection, XSS, etc.)
+- ✅ Rate limiting (5 requests per 10 seconds)
+- ✅ Bot detection (blocks malicious bots)
+- ✅ No size constraints (Node.js runtime)
+- ✅ Complete dashboard visibility
 
-### Why This Approach?
-Vercel Edge Functions (middleware) have a 1 MB size limit. Full Arcjet config (shield + rate limiting + bot detection) exceeds this. By using **shield-only** in middleware, we get:
+### Why API-Only?
+**Tested approaches:**
+1. ❌ Full Arcjet in middleware → 1.03 MB (exceeds limit)
+2. ❌ Shield-only in middleware → 1.03 MB (still exceeds limit)
+3. ✅ **API routes only** → Deploys successfully
 
-1. **Attack protection on all routes** (middleware)
-2. **Full security on critical endpoints** (API routes)
-3. **Vercel deployment compliance** (under size limit)
-4. **Dashboard visibility** for both layers
+Arcjet's core libraries are inherently too large for Vercel free tier Edge Functions, even with minimal configuration. API-route protection ensures:
+
+1. **Critical endpoints protected** (where data changes happen)
+2. **Vercel deployment success** (no bundle size errors)
+3. **Full security features** (shield + rate limiting + bot detection)
+4. **Dashboard visibility** (all API activity tracked)
 
 ### Configuration Files
 
 #### 1. lib/arcjet-config.ts
-Four protection levels:
-
-**`ajMinimal`** - Middleware (shield only)
-- Shield: LIVE mode
-- Purpose: Keep Edge Function bundle small while blocking attacks
+Three protection levels (ajMinimal exists but unused due to size constraints):
 
 **`aj`** - Base protection
 - Shield: LIVE mode
@@ -65,29 +70,29 @@ Uses `ajMinimal` for attack protection:
 - Shield blocks SQL injection, XSS, etc. on all routes
 - Graceful error handling (fail-open strategy)
 - Clerk authentication for protected routes
-- Optimized bundle size for Vercel Edge
-
-#### 3. API Routes
-Use `ajStrict` for comprehensive protection:
-- `app/api/journal/route.ts` - GET and POST
+Clerk authentication only:
+- No Arcjet integration (size constraint)
+- Protects: /admin, /resources, /projects, /security-journal
+- Lightweight: ~142 KB bundle
+- Vercel Edge Function compliantPOST
 - `app/api/journal/[id]/route.ts` - DELETE
 
 ## Security Coverage
 
-### What's Protected Everywhere (Middleware)
-✅ SQL injection attacks  
-✅ Cross-site scripting (XSS)  
-✅ Path traversal  
-✅ Command injection  
-✅ Other common web attacks  
+### What's Protected (API Routes)
+✅ **Shield protection** - SQL injection, XSS, path traversal, command injection  
+✅ **Rate limiting** - 5 requests per 10 seconds (prevents abuse)  
+✅ **Bot detection** - Blocks malicious bots from API endpoints  
+✅ **Dashboard tracking** - All API activity logged and visible  
 
-### What's Protected on APIs Only
-✅ Rate limiting (prevents abuse)  
-✅ Bot detection (blocks malicious bots)  
-✅ All shield protections (double layer)  
+### What Clerk Protects (Pages)
+✅ **Authentication** - /admin, /resources, /projects, /security-journal  
+✅ **User session management**  
+✅ **Protected route access control**  
 
 ### What's Not Protected
-⚠️ Page route rate limiting (pages can be refreshed unlimited times)  
-⚠️ Bot detection on pages (bots can crawl public pages)  
+⚠️ **Page-level Arcjet protection** (Vercel size limit)  
+⚠️ **Rate limiting on page loads** (pages can be refreshed unlimited)  
+⚠️ **Bot detection on static pages** (bots can crawl public content)  
 
-**Note:** Clerk still protects authenticated routes regardless of Arcjet.
+**Security Philosophy:** Protect where it matters most - **APIs handle data mutations** and are the primary attack surface. Pages are mostly static content and protected by Clerk where authentication is needed.
