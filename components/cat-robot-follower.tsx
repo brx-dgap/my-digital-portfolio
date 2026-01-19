@@ -31,66 +31,62 @@ export function CatRobotFollower() {
 
   return (
     <div className="relative w-full h-full flex items-center justify-center">
-      {/* Security Bot Head */}
+      {/* Realistic AI Robot Head */}
       <svg
-        viewBox="0 0 300 300"
+        viewBox="0 0 320 320"
         className="w-full h-full drop-shadow-2xl"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-          {/* Premium Gradients */}
-          <linearGradient id="mainBody" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style={{ stopColor: "#667EEA", stopOpacity: 1 }} />
-            <stop offset="50%" style={{ stopColor: "#764BA2", stopOpacity: 1 }} />
-            <stop offset="100%" style={{ stopColor: "#4A5568", stopOpacity: 1 }} />
+          {/* Realistic Gradients */}
+          <linearGradient id="metalBody" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style={{ stopColor: "#E8EAF6", stopOpacity: 1 }} />
+            <stop offset="50%" style={{ stopColor: "#C5CAE9", stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: "#9FA8DA", stopOpacity: 1 }} />
           </linearGradient>
           
-          <linearGradient id="highlight" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style={{ stopColor: "#ffffff", stopOpacity: 0.3 }} />
-            <stop offset="100%" style={{ stopColor: "#ffffff", stopOpacity: 0 }} />
+          <linearGradient id="metalDark" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style={{ stopColor: "#78909C", stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: "#546E7A", stopOpacity: 1 }} />
           </linearGradient>
           
-          <linearGradient id="darkPanel" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style={{ stopColor: "#1A202C", stopOpacity: 1 }} />
-            <stop offset="100%" style={{ stopColor: "#2D3748", stopOpacity: 1 }} />
+          <linearGradient id="visorGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style={{ stopColor: "#1A237E", stopOpacity: 0.9 }} />
+            <stop offset="100%" style={{ stopColor: "#0D47A1", stopOpacity: 0.95 }} />
           </linearGradient>
           
-          <radialGradient id="eyeGlow">
-            <stop offset="0%" style={{ stopColor: "#60F6FF", stopOpacity: 1 }} />
-            <stop offset="40%" style={{ stopColor: "#00D4FF", stopOpacity: 1 }} />
-            <stop offset="100%" style={{ stopColor: "#0088FF", stopOpacity: 0.6 }} />
+          <radialGradient id="eyeLight">
+            <stop offset="0%" style={{ stopColor: "#64B5F6", stopOpacity: 1 }} />
+            <stop offset="50%" style={{ stopColor: "#42A5F5", stopOpacity: 0.9 }} />
+            <stop offset="100%" style={{ stopColor: "#2196F3", stopOpacity: 0.7 }} />
           </radialGradient>
           
-          <radialGradient id="coreGlow">
-            <stop offset="0%" style={{ stopColor: "#A78BFA", stopOpacity: 1 }} />
-            <stop offset="50%" style={{ stopColor: "#8B5CF6", stopOpacity: 0.8 }} />
-            <stop offset="100%" style={{ stopColor: "#6366F1", stopOpacity: 0.4 }} />
+          <radialGradient id="pupilGlow">
+            <stop offset="0%" style={{ stopColor: "#FFFFFF", stopOpacity: 1 }} />
+            <stop offset="50%" style={{ stopColor: "#E3F2FD", stopOpacity: 0.8 }} />
+            <stop offset="100%" style={{ stopColor: "#90CAF9", stopOpacity: 0.5 }} />
           </radialGradient>
           
-          {/* Advanced Filters */}
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style={{ stopColor: "#FFFFFF", stopOpacity: 0.4 }} />
+            <stop offset="100%" style={{ stopColor: "#FFFFFF", stopOpacity: 0 }} />
+          </linearGradient>
+          
+          {/* Realistic Filters */}
+          <filter id="softGlow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
             <feMerge>
               <feMergeNode in="coloredBlur"/>
               <feMergeNode in="SourceGraphic"/>
             </feMerge>
           </filter>
           
-          <filter id="strongGlow">
-            <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
-            <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-          
-          <filter id="innerShadow">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
-            <feOffset dx="0" dy="2" result="offsetblur"/>
-            <feComponentTransfer>
-              <feFuncA type="linear" slope="0.5"/>
-            </feComponentTransfer>
+          <filter id="metalShine">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="1"/>
+            <feOffset dx="1" dy="1" result="offsetblur"/>
+            <feFlood floodColor="#FFFFFF" floodOpacity="0.3"/>
+            <feComposite in2="offsetblur" operator="in"/>
             <feMerge>
               <feMergeNode/>
               <feMergeNode in="SourceGraphic"/>
@@ -99,93 +95,103 @@ export function CatRobotFollower() {
         </defs>
         
         {/* Base Shadow */}
-        <ellipse cx="150" cy="280" rx="80" ry="12" fill="#000000" opacity="0.3" />
+        <ellipse cx="160" cy="295" rx="90" ry="10" fill="#000000" opacity="0.25" />
         
-        {/* Neck */}
+        {/* Neck Connector */}
+        <rect x="140" y="240" width="40" height="35" rx="5" fill="url(#metalDark)" stroke="#607D8B" strokeWidth="2" />
+        <circle cx="160" cy="257" r="6" fill="#546E7A" stroke="#37474F" strokeWidth="1.5" />
+        <line x1="150" y1="250" x2="170" y2="250" stroke="#90A4AE" strokeWidth="1" opacity="0.6" />
+        
+        {/* Main Head Structure */}
         <path
-          d="M 130 230 L 125 255 L 175 255 L 170 230 Z"
-          fill="url(#darkPanel)"
-          stroke="#4A5568"
-          strokeWidth="2"
+          d="M 80 160 Q 80 80 160 75 Q 240 80 240 160 Q 240 200 220 225 L 100 225 Q 80 200 80 160 Z"
+          fill="url(#metalBody)"
+          stroke="#90A4AE"
+          strokeWidth="2.5"
+          filter="url(#metalShine)"
         />
-        <line x1="138" y1="240" x2="162" y2="240" stroke="#667EEA" strokeWidth="1" opacity="0.4" />
         
-        {/* Head - Helmet Design */}
-        <ellipse cx="150" cy="150" rx="90" ry="85" fill="url(#mainBody)" stroke="#4A5568" strokeWidth="3" />
-        
-        {/* Helmet Top Accent */}
+        {/* Head Highlights */}
         <path
-          d="M 80 115 Q 150 70 220 115"
+          d="M 95 100 Q 160 90 225 100"
           fill="none"
-          stroke="#667EEA"
-          strokeWidth="4"
-          opacity="0.7"
+          stroke="url(#shine)"
+          strokeWidth="15"
+          opacity="0.4"
         />
-        <circle cx="150" cy="75" r="8" fill="#60F6FF" filter="url(#glow)" />
         
-        {/* Side Panels */}
-        <path d="M 65 140 L 55 150 L 60 165 L 70 155 Z" fill="url(#darkPanel)" stroke="#667EEA" strokeWidth="1.5" />
-        <path d="M 235 140 L 245 150 L 240 165 L 230 155 Z" fill="url(#darkPanel)" stroke="#667EEA" strokeWidth="1.5" />
-        
-        {/* Visor Area */}
-        <ellipse cx="150" cy="155" rx="70" ry="55" fill="#1A202C" opacity="0.8" />
-        
-        {/* Visor Edge Highlight */}
+        {/* Top Panel */}
         <path
-          d="M 85 130 Q 150 110 215 130"
-          fill="none"
-          stroke="url(#highlight)"
-          strokeWidth="2"
-          opacity="0.5"
+          d="M 110 85 Q 160 80 210 85 L 205 105 Q 160 100 115 105 Z"
+          fill="url(#metalDark)"
+          stroke="#546E7A"
+          strokeWidth="1.5"
         />
         
-        {/* Eyes - Tracking */}
-        <ellipse 
-          cx={120 + eyePosition.x} 
-          cy={150 + eyePosition.y} 
-          rx="20" 
-          ry="26" 
-          fill="url(#eyeGlow)" 
-          filter="url(#glow)"
+        {/* Side Vents */}
+        <g opacity="0.7">
+          <line x1="85" y1="130" x2="85" y2="150" stroke="#546E7A" strokeWidth="2" />
+          <line x1="90" y1="135" x2="90" y2="155" stroke="#546E7A" strokeWidth="2" />
+          <line x1="95" y1="140" x2="95" y2="160" stroke="#546E7A" strokeWidth="2" />
+          
+          <line x1="235" y1="130" x2="235" y2="150" stroke="#546E7A" strokeWidth="2" />
+          <line x1="230" y1="135" x2="230" y2="155" stroke="#546E7A" strokeWidth="2" />
+          <line x1="225" y1="140" x2="225" y2="160" stroke="#546E7A" strokeWidth="2" />
+        </g>
+        
+        {/* Visor Housing */}
+        <rect x="100" y="130" width="120" height="70" rx="15" fill="url(#visorGradient)" stroke="#1565C0" strokeWidth="2" />
+        
+        {/* Visor Reflection */}
+        <path
+          d="M 105 135 Q 160 132 215 135 L 210 145 Q 160 142 110 145 Z"
+          fill="#FFFFFF"
+          opacity="0.15"
         />
-        <ellipse 
-          cx={180 + eyePosition.x} 
-          cy={150 + eyePosition.y} 
-          rx="20" 
-          ry="26" 
-          fill="url(#eyeGlow)" 
-          filter="url(#glow)"
+        
+        {/* Eye Sockets - Stationary */}
+        <ellipse cx="130" cy="165" rx="22" ry="24" fill="url(#eyeLight)" stroke="#1976D2" strokeWidth="1.5" />
+        <ellipse cx="190" cy="165" rx="22" ry="24" fill="url(#eyeLight)" stroke="#1976D2" strokeWidth="1.5" />
+        
+        {/* Eye Inner Glow */}
+        <ellipse cx="130" cy="165" rx="18" ry="20" fill="#42A5F5" opacity="0.6" />
+        <ellipse cx="190" cy="165" rx="18" ry="20" fill="#42A5F5" opacity="0.6" />
+        
+        {/* Pupils - Only these move */}
+        <circle 
+          cx={130 + eyePosition.x * 0.5} 
+          cy={165 + eyePosition.y * 0.5} 
+          r="8" 
+          fill="url(#pupilGlow)" 
+          filter="url(#softGlow)"
+        />
+        <circle 
+          cx={190 + eyePosition.x * 0.5} 
+          cy={165 + eyePosition.y * 0.5} 
+          r="8" 
+          fill="url(#pupilGlow)" 
+          filter="url(#softGlow)"
         />
         
-        {/* Eye Details */}
-        <ellipse cx={120 + eyePosition.x} cy={150 + eyePosition.y} rx="20" ry="26" stroke="#00D4FF" strokeWidth="2" fill="none" />
-        <ellipse cx={180 + eyePosition.x} cy={150 + eyePosition.y} rx="20" ry="26" stroke="#00D4FF" strokeWidth="2" fill="none" />
+        {/* Pupil Centers */}
+        <circle cx={130 + eyePosition.x * 0.5} cy={165 + eyePosition.y * 0.5} r="4" fill="#1565C0" />
+        <circle cx={190 + eyePosition.x * 0.5} cy={165 + eyePosition.y * 0.5} r="4" fill="#1565C0" />
         
-        {/* Pupils */}
-        <circle cx={120 + eyePosition.x} cy={153 + eyePosition.y} r="7" fill="#0A0E27" />
-        <circle cx={180 + eyePosition.x} cy={153 + eyePosition.y} r="7" fill="#0A0E27" />
+        {/* Eye Highlights */}
+        <circle cx="125" cy="160" r="3" fill="#FFFFFF" opacity="0.8" />
+        <circle cx="185" cy="160" r="3" fill="#FFFFFF" opacity="0.8" />
         
-        {/* Eye Shine */}
-        <circle cx={116 + eyePosition.x} cy={145 + eyePosition.y} r="5" fill="#FFFFFF" opacity="0.9" />
-        <circle cx={176 + eyePosition.x} cy={145 + eyePosition.y} r="5" fill="#FFFFFF" opacity="0.9" />
+        {/* Forehead Details */}
+        <circle cx="160" cy="95" r="5" fill="#42A5F5" filter="url(#softGlow)" opacity={glowIntensity} />
+        <circle cx="160" cy="95" r="5" fill="none" stroke="#1976D2" strokeWidth="1" />
         
-        {/* Antenna/Sensors */}
-        <line x1="85" y1="100" x2="70" y2="65" stroke="#667EEA" strokeWidth="4" strokeLinecap="round" />
-        <line x1="215" y1="100" x2="230" y2="65" stroke="#667EEA" strokeWidth="4" strokeLinecap="round" />
-        <circle cx="70" cy="65" r="6" fill="#60F6FF" filter="url(#glow)" />
-        <circle cx="230" cy="65" r="6" fill="#60F6FF" filter="url(#glow)" />
+        {/* Status LEDs */}
+        <circle cx="110" cy="115" r="3" fill="#4CAF50" filter="url(#softGlow)" />
+        <circle cx="210" cy="115" r="3" fill="#4CAF50" filter="url(#softGlow)" />
         
-        {/* Facial Scanner Lines */}
-        <line x1="90" y1="185" x2="125" y2="185" stroke="#60F6FF" strokeWidth="1.5" opacity="0.5" />
-        <line x1="175" y1="185" x2="210" y2="185" stroke="#60F6FF" strokeWidth="1.5" opacity="0.5" />
-        
-        {/* Status Indicators */}
-        <circle cx="75" cy="150" r="4" fill="#10B981" filter="url(#glow)" />
-        <circle cx="225" cy="150" r="4" fill="#10B981" filter="url(#glow)" />
-        
-        {/* Central Power Indicator */}
-        <circle cx="150" cy="210" r="8" fill="url(#coreGlow)" filter="url(#glow)" opacity={glowIntensity} />
-        <circle cx="150" cy="210" r="8" fill="none" stroke="#A78BFA" strokeWidth="1.5" />
+        {/* Bottom Sensor Bar */}
+        <rect x="120" y="210" width="80" height="4" rx="2" fill="#1976D2" opacity="0.6" />
+        <rect x="135" y="210" width="50" height="4" rx="2" fill="#42A5F5" opacity={glowIntensity} filter="url(#softGlow)" />
       </svg>
     </div>
   );
