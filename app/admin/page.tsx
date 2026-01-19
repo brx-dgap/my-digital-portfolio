@@ -8,6 +8,9 @@ import { UserRoleManagement } from "@/components/user-role-management";
 import Link from "next/link";
 import { Database } from "lucide-react";
 
+// Force dynamic rendering to avoid static generation errors with headers()
+export const dynamic = 'force-dynamic';
+
 export default async function AdminPage() {
   // Check if user is admin - call the function
   const userIsAdmin = await isAdmin();
