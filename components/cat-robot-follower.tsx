@@ -136,33 +136,24 @@ export function CatRobotFollower() {
           opacity="0.08"
         />
         
-        {/* Three Cyan Pupils (Moving) */}
-        {/* Left Pupil - Arc shape */}
-        <ellipse
-          cx={115 + eyePosition.x * 0.4}
-          cy={160 + eyePosition.y * 0.4}
-          rx="18"
-          ry="22"
+        {/* Three Cyan Pupils (Moving) - Arc/Downward Shape */}
+        {/* Left Pupil */}
+        <path
+          d={`M ${105 + eyePosition.x * 0.4} ${155 + eyePosition.y * 0.4} Q ${115 + eyePosition.x * 0.4} ${145 + eyePosition.y * 0.4} ${125 + eyePosition.x * 0.4} ${155 + eyePosition.y * 0.4} L ${120 + eyePosition.x * 0.4} ${165 + eyePosition.y * 0.4} Q ${115 + eyePosition.x * 0.4} ${160 + eyePosition.y * 0.4} ${110 + eyePosition.x * 0.4} ${165 + eyePosition.y * 0.4} Z`}
           fill="url(#pupilGlow)"
           filter="url(#glow)"
         />
         
-        {/* Center Pupil - Arc shape */}
-        <ellipse
-          cx={170 + eyePosition.x * 0.4}
-          cy={165 + eyePosition.y * 0.4}
-          rx="18"
-          ry="22"
+        {/* Center Pupil */}
+        <path
+          d={`M ${160 + eyePosition.x * 0.4} ${160 + eyePosition.y * 0.4} Q ${170 + eyePosition.x * 0.4} ${150 + eyePosition.y * 0.4} ${180 + eyePosition.x * 0.4} ${160 + eyePosition.y * 0.4} L ${175 + eyePosition.x * 0.4} ${170 + eyePosition.y * 0.4} Q ${170 + eyePosition.x * 0.4} ${165 + eyePosition.y * 0.4} ${165 + eyePosition.x * 0.4} ${170 + eyePosition.y * 0.4} Z`}
           fill="url(#pupilGlow)"
           filter="url(#glow)"
         />
         
-        {/* Right Pupil - Arc shape */}
-        <ellipse
-          cx={225 + eyePosition.x * 0.4}
-          cy={160 + eyePosition.y * 0.4}
-          rx="18"
-          ry="22"
+        {/* Right Pupil */}
+        <path
+          d={`M ${215 + eyePosition.x * 0.4} ${155 + eyePosition.y * 0.4} Q ${225 + eyePosition.x * 0.4} ${145 + eyePosition.y * 0.4} ${235 + eyePosition.x * 0.4} ${155 + eyePosition.y * 0.4} L ${230 + eyePosition.x * 0.4} ${165 + eyePosition.y * 0.4} Q ${225 + eyePosition.x * 0.4} ${160 + eyePosition.y * 0.4} ${220 + eyePosition.x * 0.4} ${165 + eyePosition.y * 0.4} Z`}
           fill="url(#pupilGlow)"
           filter="url(#glow)"
         />
