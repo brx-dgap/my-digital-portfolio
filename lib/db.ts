@@ -1,6 +1,7 @@
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
 import { boolean, pgTable, serial, text, timestamp, varchar, json } from "drizzle-orm/pg-core";
+import { journalEntries } from "@/lib/journal-schema";
 
 
 console.log("Initializing database connection...");
@@ -80,3 +81,6 @@ export const projects = pgTable("projects", {
 });
 
 // Contact submissions table removed as requested
+
+// Export journal entries schema for use throughout the app
+export { journalEntries };

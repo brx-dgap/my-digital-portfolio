@@ -1,4 +1,6 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
+import { aj } from "@/lib/arcjet-config";
 
 /**
  * Protected routes that require user authentication
@@ -12,7 +14,38 @@ const isProtectedRoute = createRouteMatcher([
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
-  // Protect routes that require authentication
+  // Apply Arcjet protection first (shield, rate limiting, bot detection)
+  const decision = await aj.protect(req);
+  
+  // Handle Arcjet errors gracefully - fail open
+  for (const result of decision.results) {
+    if (result.reason.isError()) {
+      console.warn('Arcjet middleware error:', result.reason.message);
+      // Continue processing even if Arcjet has an error
+    }
+  }
+  
+  // Block if Arcjet denies the request
+  if (decision.isDenied()) {
+    if (decision.reason.isRateLimit()) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429 }
+      );
+    }
+    if (decision.reason.isBot()) {
+      return NextResponse.json(
+        { error: 'Bot detected. Access denied.' },
+        { status: 403 }
+      );
+    }
+    return NextResponse.json(
+      { error: 'Access denied.' },
+      { status: 403 }
+    );
+  }
+  
+  // Then protect routes that require authentication
   if (isProtectedRoute(req)) {
     await auth.protect();
   }

@@ -2,7 +2,7 @@
 
 import { useUser } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
-import { checkIsAdmin } from "@/actions/admin";
+import { checkAdminStatus } from "@/app/actions/admin";
 
 export const useAdmin = () => {
   const { user, isLoaded } = useUser();
@@ -25,10 +25,10 @@ export const useAdmin = () => {
         console.log("useAdmin: Checking admin status for user:", user.id);
         
         // Call the server action to check if the user is an admin
-        const result = await checkIsAdmin();
+        const result = await checkAdminStatus();
         
         console.log("useAdmin: Admin check result:", result);
-        setIsAdmin(!!result.isAdmin);
+        setIsAdmin(result.status === "success" && !!result.data?.isAdmin);
       } catch (error) {
         console.error("useAdmin: Error checking admin status:", error);
         setIsAdmin(false);

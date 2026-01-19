@@ -51,7 +51,7 @@ if (!dbConfig && !(process.env.PGHOST && process.env.PGUSER && process.env.PGDAT
 
 // Configuration for drizzle-kit
 export default {
-  schema: "./lib/db.ts",
+  schema: ["./lib/db.ts", "./lib/journal-schema.ts"],
   out: "./drizzle",
   dialect: "postgresql",
   dbCredentials: dbConfig || {

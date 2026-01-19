@@ -9,9 +9,15 @@ import { useEffect } from "react";
  * - Inspect element (F12, Ctrl+Shift+I, Ctrl+Shift+C)
  * - View page source (Ctrl+U)
  * - Developer tools
+ * 
+ * Note: Only active in production to allow development tools during development
  */
 export default function PageProtection() {
   useEffect(() => {
+    // Only enable protection in production
+    if (process.env.NODE_ENV !== 'production') {
+      return;
+    }
     // Disable right-click
     const handleContextMenu = (e: MouseEvent) => {
       e.preventDefault();

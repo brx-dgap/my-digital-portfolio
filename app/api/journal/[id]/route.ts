@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
 import { deleteJournalEntry } from '@/app/actions/journal';
-import { aj } from '@/lib/arcjet-config';
+import { ajStrict } from '@/lib/arcjet-config';
 
 export async function DELETE(req: Request, { params }: { params: { id: string } }) {
-  // Arcjet protection
-  const decision = await aj.protect(req);
+  // Arcjet strict protection for API routes
+  const decision = await ajStrict.protect(req);
   
   // Handle errors - fail open (allow request through but log error)
   for (const result of decision.results) {

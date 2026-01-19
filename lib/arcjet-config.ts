@@ -1,20 +1,81 @@
-import arcjet, { shield } from "@arcjet/next";
+import arcjet, { shield, tokenBucket, detectBot } from "@arcjet/next";
 
 /**
- * Simplified Arcjet configuration - just shield protection
- * This minimal config helps avoid errors while still protecting against attacks
+ * Enhanced Arcjet configuration for Next.js 15
+ * Provides layered security: Shield, Rate Limiting, and Bot Protection
+ * 
+ * Shield: Protects against common attacks (SQL injection, XSS, etc.)
+ * Rate Limiting: Prevents abuse by limiting requests per time window
+ * Bot Detection: Identifies and blocks malicious bots
  */
 
-// Minimal protection - just shield (attack prevention)
+// Base protection for all routes - Shield + Bot detection + Basic rate limiting
 export const aj = arcjet({
+  key: process.env.ARCJET_KEY!,
+  rules: [
+    // Shield protection against common attacks
+    shield({
+      mode: "LIVE",
+    }),
+    // Detect and block malicious bots
+    detectBot({
+      mode: "LIVE",
+      allow: [
+        // Allow search engine crawlers
+        "CATEGORY:SEARCH_ENGINE",
+      ],
+    }),
+    // Basic rate limiting for general routes
+    tokenBucket({
+      mode: "LIVE",
+      characteristics: ["ip"],
+      refillRate: 20, // 20 tokens per interval
+      interval: 10, // every 10 seconds
+      capacity: 100, // bucket can hold up to 100 tokens
+    }),
+  ],
+});
+
+// Strict protection for API routes and admin pages - More aggressive rate limiting
+export const ajStrict = arcjet({
   key: process.env.ARCJET_KEY!,
   rules: [
     shield({
       mode: "LIVE",
     }),
+    detectBot({
+      mode: "LIVE",
+      allow: [], // Don't allow any bots on sensitive endpoints
+    }),
+    // Stricter rate limiting for API endpoints
+    tokenBucket({
+      mode: "LIVE",
+      characteristics: ["ip"],
+      refillRate: 5, // 5 tokens per interval
+      interval: 10, // every 10 seconds
+      capacity: 20, // smaller bucket capacity
+    }),
   ],
 });
 
-// Same as aj for now - we can expand later once it's working
-export const ajStrict = aj;
-export const ajPublic = aj;
+// Public protection for forms and newsletter - Email validation + Rate limiting
+export const ajPublic = arcjet({
+  key: process.env.ARCJET_KEY!,
+  rules: [
+    shield({
+      mode: "LIVE",
+    }),
+    detectBot({
+      mode: "LIVE",
+      allow: ["CATEGORY:SEARCH_ENGINE"],
+    }),
+    // Moderate rate limiting for public forms
+    tokenBucket({
+      mode: "LIVE",
+      characteristics: ["ip"],
+      refillRate: 10, // 10 tokens per interval
+      interval: 60, // every minute
+      capacity: 30, // moderate capacity
+    }),
+  ],
+});
