@@ -3,24 +3,20 @@
 import { useEffect, useState } from "react";
 
 export function CatRobotFollower() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [eyePosition, setEyePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      // Calculate eye movement based on mouse position relative to viewport center
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
       
-      // Calculate eye movement based on mouse position
-      // Cat is positioned at bottom-left (100px from left, 100px from bottom)
-      const catX = 100;
-      const catY = window.innerHeight - 100;
-      
-      const deltaX = e.clientX - catX;
-      const deltaY = e.clientY - catY;
+      const deltaX = e.clientX - centerX;
+      const deltaY = e.clientY - centerY;
       const angle = Math.atan2(deltaY, deltaX);
       
       // Limit eye movement
-      const maxMove = 4;
+      const maxMove = 6;
       const eyeX = Math.cos(angle) * maxMove;
       const eyeY = Math.sin(angle) * maxMove;
       
@@ -32,113 +28,159 @@ export function CatRobotFollower() {
   }, []);
 
   return (
-    <div
-      className="fixed bottom-8 left-8 z-40 pointer-events-none"
-      style={{ width: "120px", height: "120px" }}
-    >
-      {/* Siamese Cat SVG - sitting position */}
+    <div className="relative w-full h-full flex items-center justify-center">
+      {/* 3D Robot Cat SVG - Hero Style */}
       <svg
-        viewBox="0 0 200 200"
+        viewBox="0 0 400 500"
         className="w-full h-full drop-shadow-2xl"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Body */}
-        <ellipse cx="100" cy="140" rx="45" ry="50" fill="#E5D4C1" stroke="#8B7355" strokeWidth="2" />
+        <defs>
+          <linearGradient id="bodyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style={{ stopColor: "#F5F5F5", stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: "#D0D0D0", stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="darkGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style={{ stopColor: "#4A4A4A", stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: "#2A2A2A", stopOpacity: 1 }} />
+          </linearGradient>
+          <radialGradient id="eyeGlow">
+            <stop offset="0%" style={{ stopColor: "#00D4FF", stopOpacity: 1 }} />
+            <stop offset="50%" style={{ stopColor: "#0088FF", stopOpacity: 0.8 }} />
+            <stop offset="100%" style={{ stopColor: "#0044AA", stopOpacity: 0.6 }} />
+          </radialGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        
+        {/* Shadow */}
+        <ellipse cx="200" cy="480" rx="120" ry="20" fill="#000" opacity="0.3" />
         
         {/* Tail */}
         <path
-          d="M 140 150 Q 170 140 180 120 Q 185 110 180 100"
-          stroke="#8B7355"
-          strokeWidth="8"
+          d="M 280 380 Q 340 360 360 320 Q 370 290 360 260"
+          stroke="url(#darkGradient)"
+          strokeWidth="18"
           fill="none"
           strokeLinecap="round"
+          opacity="0.8"
         />
         
-        {/* Front paws */}
-        <ellipse cx="85" cy="175" rx="8" ry="15" fill="#A89080" />
-        <ellipse cx="115" cy="175" rx="8" ry="15" fill="#A89080" />
+        {/* Back legs */}
+        <rect x="150" y="380" width="35" height="80" rx="17" fill="url(#darkGradient)" />
+        <rect x="215" y="380" width="35" height="80" rx="17" fill="url(#darkGradient)" />
+        <ellipse cx="167" cy="465" rx="22" ry="12" fill="#2A2A2A" />
+        <ellipse cx="232" cy="465" rx="22" ry="12" fill="#2A2A2A" />
+        
+        {/* Robot body (torso) */}
+        <path
+          d="M 130 280 L 130 380 Q 130 400 150 400 L 250 400 Q 270 400 270 380 L 270 280 Q 270 260 250 260 L 150 260 Q 130 260 130 280 Z"
+          fill="url(#bodyGradient)"
+          stroke="#888"
+          strokeWidth="3"
+        />
+        
+        {/* Chest panel details */}
+        <rect x="160" y="290" width="80" height="90" rx="8" fill="#E0E0E0" stroke="#999" strokeWidth="2" />
+        <circle cx="200" cy="335" r="15" fill="#00D4FF" opacity="0.3" filter="url(#glow)" />
+        <line x1="170" y1="310" x2="230" y2="310" stroke="#AAA" strokeWidth="2" />
+        <line x1="170" y1="325" x2="230" y2="325" stroke="#AAA" strokeWidth="2" />
+        <line x1="170" y1="360" x2="230" y2="360" stroke="#AAA" strokeWidth="2" />
+        
+        {/* Robot joints/segments */}
+        <circle cx="130" cy="350" r="12" fill="#666" stroke="#333" strokeWidth="2" />
+        <circle cx="270" cy="350" r="12" fill="#666" stroke="#333" strokeWidth="2" />
+        
+        {/* Robot neck */}
+        <rect x="175" y="220" width="50" height="40" rx="8" fill="#C0C0C0" stroke="#888" strokeWidth="2" />
+        <circle cx="190" cy="240" r="4" fill="#555" />
+        <circle cx="210" cy="240" r="4" fill="#555" />
         
         {/* Head */}
-        <circle cx="100" cy="90" r="35" fill="#C4B5A0" stroke="#8B7355" strokeWidth="2" />
+        <ellipse cx="200" cy="150" rx="85" ry="80" fill="url(#bodyGradient)" stroke="#888" strokeWidth="3" />
         
-        {/* Ears */}
-        <path d="M 75 70 L 65 40 L 85 65 Z" fill="#A89080" stroke="#8B7355" strokeWidth="1.5" />
-        <path d="M 125 70 L 135 40 L 115 65 Z" fill="#A89080" stroke="#8B7355" strokeWidth="1.5" />
+        {/* Ears (robotic) */}
+        <path d="M 140 110 L 110 50 L 160 100 Z" fill="url(#darkGradient)" stroke="#555" strokeWidth="2" />
+        <path d="M 260 110 L 290 50 L 240 100 Z" fill="url(#darkGradient)" stroke="#555" strokeWidth="2" />
+        {/* Ear panels */}
+        <path d="M 140 105 L 125 70 L 152 98 Z" fill="#FF6B9D" opacity="0.6" />
+        <path d="M 260 105 L 275 70 L 248 98 Z" fill="#FF6B9D" opacity="0.6" />
         
-        {/* Inner ears (pink) */}
-        <path d="M 75 65 L 70 50 L 80 63 Z" fill="#FFB6C1" />
-        <path d="M 125 65 L 130 50 L 120 63 Z" fill="#FFB6C1" />
+        {/* Face mask (darker) */}
+        <ellipse cx="200" cy="160" rx="60" ry="48" fill="url(#darkGradient)" opacity="0.7" />
         
-        {/* Face marking (darker gray) */}
-        <ellipse cx="100" cy="95" rx="25" ry="20" fill="#8B7D6B" opacity="0.6" />
-        
-        {/* Eyes (blue like your cat) */}
+        {/* Robotic eyes (glowing blue) */}
         <ellipse 
-          cx={82 + eyePosition.x} 
-          cy={85 + eyePosition.y} 
-          rx="8" 
-          ry="12" 
-          fill="#4A90E2" 
-          stroke="#2C5F8D" 
-          strokeWidth="1.5"
+          cx={165 + eyePosition.x} 
+          cy={145 + eyePosition.y} 
+          rx="20" 
+          ry="28" 
+          fill="url(#eyeGlow)" 
+          filter="url(#glow)"
         />
         <ellipse 
-          cx={118 + eyePosition.x} 
-          cy={85 + eyePosition.y} 
-          rx="8" 
-          ry="12" 
-          fill="#4A90E2" 
-          stroke="#2C5F8D" 
-          strokeWidth="1.5"
+          cx={235 + eyePosition.x} 
+          cy={145 + eyePosition.y} 
+          rx="20" 
+          ry="28" 
+          fill="url(#eyeGlow)" 
+          filter="url(#glow)"
         />
         
-        {/* Pupils */}
+        {/* Eye frames */}
+        <ellipse cx={165 + eyePosition.x} cy={145 + eyePosition.y} rx="20" ry="28" stroke="#333" strokeWidth="2" fill="none" />
+        <ellipse cx={235 + eyePosition.x} cy={145 + eyePosition.y} rx="20" ry="28" stroke="#333" strokeWidth="2" fill="none" />
+        
+        {/* Pupils (vertical slits) */}
         <ellipse 
-          cx={82 + eyePosition.x} 
-          cy={87 + eyePosition.y} 
-          rx="3" 
-          ry="6" 
+          cx={165 + eyePosition.x} 
+          cy={147 + eyePosition.y} 
+          rx="4" 
+          ry="18" 
           fill="#000"
         />
         <ellipse 
-          cx={118 + eyePosition.x} 
-          cy={87 + eyePosition.y} 
-          rx="3" 
-          ry="6" 
+          cx={235 + eyePosition.x} 
+          cy={147 + eyePosition.y} 
+          rx="4" 
+          ry="18" 
           fill="#000"
         />
         
         {/* Eye shine */}
-        <circle cx={81 + eyePosition.x} cy={83 + eyePosition.y} r="2" fill="#FFF" opacity="0.8" />
-        <circle cx={117 + eyePosition.x} cy={83 + eyePosition.y} r="2" fill="#FFF" opacity="0.8" />
+        <ellipse cx={162 + eyePosition.x} cy={138 + eyePosition.y} rx="5" ry="8" fill="#FFF" opacity="0.9" />
+        <ellipse cx={232 + eyePosition.x} cy={138 + eyePosition.y} rx="5" ry="8" fill="#FFF" opacity="0.9" />
         
-        {/* Nose */}
-        <path d="M 100 100 L 97 103 L 103 103 Z" fill="#8B6F5C" />
+        {/* Nose (small triangle sensor) */}
+        <path d="M 200 175 L 195 182 L 205 182 Z" fill="#FF6B9D" stroke="#CC5578" strokeWidth="1.5" />
         
-        {/* Mouth */}
+        {/* Whiskers (metallic) */}
+        <line x1="140" y1="160" x2="90" y2="155" stroke="#999" strokeWidth="2" opacity="0.7" />
+        <line x1="140" y1="170" x2="90" y2="175" stroke="#999" strokeWidth="2" opacity="0.7" />
+        <line x1="260" y1="160" x2="310" y2="155" stroke="#999" strokeWidth="2" opacity="0.7" />
+        <line x1="260" y1="170" x2="310" y2="175" stroke="#999" strokeWidth="2" opacity="0.7" />
+        
+        {/* Whisker tips (sensors) */}
+        <circle cx="90" cy="155" r="3" fill="#00D4FF" filter="url(#glow)" />
+        <circle cx="90" cy="175" r="3" fill="#00D4FF" filter="url(#glow)" />
+        <circle cx="310" cy="155" r="3" fill="#00D4FF" filter="url(#glow)" />
+        <circle cx="310" cy="175" r="3" fill="#00D4FF" filter="url(#glow)" />
+        
+        {/* Mouth line */}
         <path
-          d="M 100 103 L 95 106 M 100 103 L 105 106"
-          stroke="#8B6F5C"
-          strokeWidth="1.5"
+          d="M 190 190 Q 200 195 210 190"
+          stroke="#555"
+          strokeWidth="2"
           fill="none"
           strokeLinecap="round"
         />
-        
-        {/* Whiskers */}
-        <line x1="75" y1="95" x2="50" y2="93" stroke="#8B7355" strokeWidth="1" />
-        <line x1="75" y1="100" x2="50" y2="102" stroke="#8B7355" strokeWidth="1" />
-        <line x1="125" y1="95" x2="150" y2="93" stroke="#8B7355" strokeWidth="1" />
-        <line x1="125" y1="100" x2="150" y2="102" stroke="#8B7355" strokeWidth="1" />
-        
-        {/* Chest patch (lighter) */}
-        <ellipse cx="100" cy="120" rx="15" ry="20" fill="#F5EFE7" opacity="0.7" />
       </svg>
-      
-      {/* Tooltip */}
-      <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded whitespace-nowrap opacity-0 hover:opacity-100 transition-opacity pointer-events-auto">
-        I'm watching you! 👀
-      </div>
     </div>
   );
 }
