@@ -47,12 +47,25 @@ export const aj = arcjet({
   ],
 });
 
-// Strict protection for API routes - SIMPLE CONFIG THAT WORKS
+// Strict protection for API routes - Enhanced with Rate Limiting and Bot Detection
 export const ajStrict = arcjet({
   key: process.env.ARCJET_KEY!,
   rules: [
     shield({
       mode: "LIVE",
+    }),
+    // Bot detection to block malicious automated attacks
+    detectBot({
+      mode: "LIVE",
+      allow: [], // Block all bots except legitimate ones
+    }),
+    // Rate limiting to prevent DDoS and spam
+    tokenBucket({
+      mode: "LIVE",
+      characteristics: ["ip"],
+      refillRate: 5,    // 5 tokens per interval
+      interval: 60,     // every 60 seconds (1 minute)
+      capacity: 10,     // max burst of 10 requests
     }),
   ],
 });
