@@ -7,7 +7,6 @@ import { NewsletterForm } from "@/components/newsletter-form"
 import { db, blogPosts } from "@/lib/db"
 import { formatDate } from "@/lib/utils"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { SimpleChatbot } from "@/components/simple-chatbot"
 
 export default async function Home() {
   // Fetch the latest 3 blog posts with error handling
@@ -30,8 +29,6 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col">
-      {/* Chatbot */}
-      <SimpleChatbot />
       {/* Hero Section */}
       <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-black relative overflow-hidden">
         <div className="container px-4 md:px-6 relative z-10">

@@ -8,6 +8,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { ClerkProvider } from "@clerk/nextjs";
 import { AuthSync } from "@/components/auth-sync";
 import PageProtection from "@/components/page-protection";
+import { SimpleChatbot } from "@/components/simple-chatbot";
 // import {
 //   SignInButton,
 //   SignUpButton,
@@ -41,6 +42,7 @@ export default function RootLayout({
           <div className="flex min-h-screen flex-col">
             <Navbar />
             <main className="flex-1">{children}</main>
+            <SimpleChatbot />
             <Footer />
             <Toaster />
           </div>
