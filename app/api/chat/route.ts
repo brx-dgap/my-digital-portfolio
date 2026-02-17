@@ -54,6 +54,11 @@ async function buildPortfolioContext() {
 
 export async function POST(request: Request) {
   try {
+    if (!process.env.OPENAI_API_KEY) {
+      console.error("Missing OPENAI_API_KEY in server environment.");
+      return NextResponse.json({ error: "Missing API key." }, { status: 500 });
+    }
+
     const body = await request.json();
     const parsed = chatRequestSchema.safeParse(body);
 
@@ -103,7 +108,11 @@ export async function POST(request: Request) {
 
     if (!openAiResponse.ok) {
       const errorText = await openAiResponse.text();
-      console.error("OpenAI error:", errorText);
+      console.error("OpenAI error:", {
+        status: openAiResponse.status,
+        statusText: openAiResponse.statusText,
+        body: errorText,
+      });
       return NextResponse.json({ error: "Chat service unavailable." }, { status: 502 });
     }
 
@@ -111,6 +120,7 @@ export async function POST(request: Request) {
     const reply = data?.choices?.[0]?.message?.content?.trim();
 
     if (!reply) {
+      console.error("OpenAI response missing reply content.");
       return NextResponse.json({ error: "Empty response from chat service." }, { status: 502 });
     }
 
