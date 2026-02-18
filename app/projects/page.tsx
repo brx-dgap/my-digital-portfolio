@@ -1,18 +1,6 @@
-import { Shield, AlertTriangle, FileCode, Lock, Server, Users } from "lucide-react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import ClientProjectAdmin from "@/components/client-project-admin"
 import { getProjects } from "@/app/actions/projects"
 import ProjectCard from "@/components/project-card"
-
-// Map icon strings to Lucide components
-const iconMap = {
-  AlertTriangle: AlertTriangle,
-  Shield: Shield,
-  FileCode: FileCode,
-  Lock: Lock,
-  Server: Server,
-  Users: Users
-}
 
 export default async function ProjectsPage() {
   // Fetch projects directly using the server action.
@@ -43,13 +31,11 @@ export default async function ProjectsPage() {
             {/* Use the new ProjectCard component with delete functionality */}
             {Array.isArray(projects) && projects.map((project) => {
               if (!Array.isArray(project.items)) return null; 
-              const IconComponent = iconMap[project.icon as keyof typeof iconMap] || Shield; 
               
               return (
                 <ProjectCard 
                   key={project.id}
                   project={project}
-                  IconComponent={IconComponent}
                 />
               )
             })}

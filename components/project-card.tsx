@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Shield, Trash2 } from "lucide-react";
+import { Shield, Trash2, AlertTriangle, FileCode, Lock, Server, Users } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { 
@@ -20,19 +20,30 @@ import { deleteProject } from "@/app/actions/projects";
 import { useAdmin } from "@/hooks/use-admin";
 import { useRouter } from "next/navigation";
 import { Project } from "@/lib/types";
-import { LucideIcon } from "lucide-react";
 
 interface ProjectCardProps {
   project: Project;
-  IconComponent: LucideIcon;
 }
 
-export default function ProjectCard({ project, IconComponent }: ProjectCardProps) {
+// Map icon strings to Lucide components
+const iconMap = {
+  AlertTriangle: AlertTriangle,
+  Shield: Shield,
+  FileCode: FileCode,
+  Lock: Lock,
+  Server: Server,
+  Users: Users
+};
+
+export default function ProjectCard({ project }: ProjectCardProps) {
   const { isAdmin } = useAdmin();
   const { toast } = useToast();
   const router = useRouter();
   const [isDeleting, setIsDeleting] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+  // Get the icon component based on the project's icon string
+  const IconComponent = iconMap[project.icon as keyof typeof iconMap] || Shield;
 
   const handleDelete = async () => {
     setIsDeleting(true);
