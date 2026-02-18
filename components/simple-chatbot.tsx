@@ -26,7 +26,7 @@ export function SimpleChatbot() {
     const trimmed = input.trim();
     if (!trimmed || isSending) return;
 
-    const nextMessages = [...messages, { role: "user", content: trimmed }];
+    const nextMessages: Message[] = [...messages, { role: "user", content: trimmed }];
     setMessages(nextMessages);
     setInput("");
     setIsSending(true);
