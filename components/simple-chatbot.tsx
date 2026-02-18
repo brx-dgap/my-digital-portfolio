@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { MessageCircle, X, Send } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 interface Message {
   role: "user" | "assistant";
@@ -13,6 +14,7 @@ interface Message {
 
 export function SimpleChatbot() {
   const [isOpen, setIsOpen] = useState(false);
+  const [showGreeting, setShowGreeting] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
@@ -22,6 +24,22 @@ export function SimpleChatbot() {
   const [input, setInput] = useState("");
   const [isSending, setIsSending] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Show greeting bubble on first visit
+  useEffect(() => {
+    const hasSeenGreeting = localStorage.getItem('chatbot-greeting-seen');
+    if (!hasSeenGreeting) {
+      const timer = setTimeout(() => {
+        setShowGreeting(true);
+        // Auto-hide greeting after 8 seconds
+        setTimeout(() => {
+          setShowGreeting(false);
+          localStorage.setItem('chatbot-greeting-seen', 'true');
+        }, 8000);
+      }, 2000); // Show after 2 seconds
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   // Auto-scroll to bottom when messages change
   const scrollToBottom = () => {
@@ -75,15 +93,39 @@ export function SimpleChatbot() {
 
   return (
     <>
+      {/* Greeting Bubble */}
+      {showGreeting && !isOpen && (
+        <div className="fixed bottom-24 right-6 z-40 animate-in slide-in-from-bottom-5 fade-in">
+          <Card className="w-64 shadow-xl border-primary/50 bg-primary/10 backdrop-blur-sm">
+            <CardContent className="p-4">
+              <p className="text-sm font-medium">👋 Hi! Need help navigating the portfolio?</p>
+              <p className="text-xs text-muted-foreground mt-1">Click the chat button to talk with me!</p>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
       {/* Chat Button */}
       {!isOpen && (
-        <Button
-          onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg bg-primary hover:bg-primary/90 z-50"
-          size="icon"
-        >
-          <MessageCircle className="h-6 w-6" />
-        </Button>
+        <div className="fixed bottom-6 right-6 z-50">
+          <Button
+            onClick={() => {
+              setIsOpen(true);
+              setShowGreeting(false);
+            }}
+            className="h-14 px-6 rounded-full shadow-lg bg-primary hover:bg-primary/90 hover:scale-105 transition-all duration-200 relative group"
+            size="lg"
+          >
+            <MessageCircle className="h-6 w-6" />
+            <span className="ml-2 font-semibold">Chat</span>
+            {/* Notification Badge */}
+            <Badge className="absolute -top-1 -right-1 h-6 w-6 rounded-full p-0 flex items-center justify-center bg-destructive text-destructive-foreground border-2 border-background animate-pulse">
+              1
+            </Badge>
+            {/* Pulsing ring effect */}
+            <span className="absolute inset-0 rounded-full bg-primary animate-ping opacity-20"></span>
+          </Button>
+        </div>
       )}
 
       {/* Chat Window */}

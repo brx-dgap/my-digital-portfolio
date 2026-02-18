@@ -38,7 +38,7 @@ export default function RootLayout({
         <PageProtection />
         {/* Include AuthSync component for auto user role assignment */}
         <AuthSync />
-        <ThemeProvider attribute="class" defaultTheme="cyber" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="cyber" enableSystem={false} disableTransitionOnChange>
           <div className="flex min-h-screen flex-col">
             <Navbar />
             <main className="flex-1">{children}</main>
