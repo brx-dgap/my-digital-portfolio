@@ -47,6 +47,28 @@
     --input: 240 3.7% 15.9%;
     --ring: 217.2 91.2% 59.8%;
   }
+
+  .cyber {
+    --background: 222 47% 11%;
+    --foreground: 180 100% 90%;
+    --card: 217 33% 17%;
+    --card-foreground: 180 100% 90%;
+    --popover: 217 33% 17%;
+    --popover-foreground: 180 100% 90%;
+    --primary: 189 94% 43%;
+    --primary-foreground: 222 47% 11%;
+    --secondary: 217 33% 23%;
+    --secondary-foreground: 180 100% 90%;
+    --muted: 217 33% 23%;
+    --muted-foreground: 189 60% 70%;
+    --accent: 189 94% 43%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 217 33% 27%;
+    --input: 217 33% 27%;
+    --ring: 189 94% 43%;
+  }
 }
 
 @layer base {

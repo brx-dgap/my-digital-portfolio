@@ -90,6 +90,7 @@ export default function AddProjectForm({ onProjectAdded }: AddProjectFormProps):
       setSelectedIcon("");
       setItems([]);
       setIsFormVisible(false);
+      setIsSubmitting(false);
       
       // Show success message
       toast({
@@ -101,6 +102,7 @@ export default function AddProjectForm({ onProjectAdded }: AddProjectFormProps):
       onProjectAdded();
     } else if (state?.message) {
       // Show error message if there's a message but success is false
+      setIsSubmitting(false);
       toast({
         title: "Error",
         description: state.message,
@@ -143,6 +145,11 @@ export default function AddProjectForm({ onProjectAdded }: AddProjectFormProps):
    * @param {FormData} formData - The form data captured by the form action
    */
   const handleFormSubmit = async (formData: FormData): Promise<void> => {
+    // Prevent duplicate submissions
+    if (isSubmitting) {
+      return;
+    }
+
     // Client-side validation before submission
     if (!title.trim() || !description.trim() || !selectedIcon || items.length === 0) {
       toast({
@@ -155,13 +162,22 @@ export default function AddProjectForm({ onProjectAdded }: AddProjectFormProps):
 
     setIsSubmitting(true);
 
-    // Add items as JSON string to FormData since FormData doesn't support arrays directly
-    formData.append('items', JSON.stringify(items));
+    try {
+      // Add items as JSON string to FormData since FormData doesn't support arrays directly
+      formData.append('items', JSON.stringify(items));
 
-    // Using formAction from useActionState
-    await formAction(formData);
-
-    setIsSubmitting(false);
+      // Using formAction from useActionState
+      await formAction(formData);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Error",
+        description: "Failed to create project. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   
   return (
@@ -255,8 +271,8 @@ export default function AddProjectForm({ onProjectAdded }: AddProjectFormProps):
                   </div>
                 )}
               </div>
-              <Button type="submit" disabled={isSubmitting}>
-                {isSubmitting ? "Creating..." : "Create Project"}
+              <Button type="submit" disabled={isSubmitting} className="w-full">
+                {isSubmitting ? "Creating Project..." : "Create Project"}
               </Button>
             </form>
           </CardContent>
