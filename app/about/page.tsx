@@ -12,9 +12,8 @@ export default function AboutPage() {
             <div className="space-y-2">
               <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl text-white">About Me</h1>
               <p className="max-w-[700px] text-gray-400 md:text-xl/relaxed">
-                I’m Brix Digap — a 2nd‑year student and emerging AI security practitioner focused on hardening AI
-                agents, MCP servers, and secure portfolios. I’m building practical, portfolio-ready security skills
-                through hands-on workshops and projects.
+                I'm Brix Digap — a 2nd‑year IT student currently taking the ECA Cybersecurity class. 
+                I'm building practical, portfolio-ready security skills through hands-on learning and real projects.
               </p>
             </div>
           </div>
@@ -32,14 +31,14 @@ export default function AboutPage() {
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Brix Digap</h2>
                 <p className="text-xl text-muted-foreground">
-                  <span className="text-primary font-semibold">2nd‑Year Student • AI Protector Workshop Participant</span>
+                  <span className="text-primary font-semibold">2nd‑Year IT Student • ECA Cybersecurity Program Graduate</span>
                 </p>
               </div>
               <div className="space-y-4">
                 <p className="text-muted-foreground">
-                  I completed the AI Protector Workshop — a 10‑week, security‑first program that taught secure AI
+                  I completed the ECA Cybersecurity Program — a 10‑week, security‑first class that taught secure AI
                   development lifecycles, layered defenses (WAF, Arcjet, Vercel Firewall), MCP authentication (OAuth 2.1),
-                  and practical offensive testing with Kali Linux. The workshop equipped me to evaluate and defend AI
+                  and practical offensive testing with Kali Linux. The program equipped me to evaluate and defend AI
                   systems from development through production.
                 </p>
                 <p className="text-muted-foreground">
@@ -106,7 +105,7 @@ export default function AboutPage() {
                 <CardDescription>Technical & innovation recognitions</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">Best in Coding; Most Innovative Science Project; Agri Tech Innovate Top 3 Regionals & Top 12 Nationals.</p>
+                <p className="text-sm text-muted-foreground">Best in Coding; Most Innovative Science Project; Agri Tech Innovate Top 3 Regionals & Top 12 Nationals; ECA Cybersecurity Program (10 weeks).</p>
               </CardContent>
             </Card>
 
@@ -132,7 +131,7 @@ export default function AboutPage() {
                 <CardDescription>Hackathons & events</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">App Con (2024–2025), Start Up Challenge (2025), International Work Immersion Award (2023–2024).</p>
+                <p className="text-sm text-muted-foreground">AI Singapore Competition; App Con (2024–2025); Start Up Challenge (2025); International Work Immersion Award (2023–2024).</p>
               </CardContent>
             </Card>
           </div>
@@ -226,19 +225,39 @@ export default function AboutPage() {
           <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-primary/40 before:to-transparent">
             <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
               <div className="flex items-center justify-center w-10 h-10 rounded-full border border-primary/20 bg-background shadow-sm z-10 md:group-odd:ml-8 md:group-even:mr-8">
-                <Briefcase className="h-5 w-5 text-primary" />
+                <GraduationCap className="h-5 w-5 text-primary" />
               </div>
               <div className="w-full md:w-[calc(50%-4rem)] bg-background p-5 rounded-lg border border-primary/20 shadow-sm">
                 <div className="flex items-center justify-between space-x-2 mb-1">
-                  <h3 className="font-bold text-lg">AI Protector Workshop Participant</h3>
+                  <h3 className="font-bold text-lg">2nd Year IT Student</h3>
+                  <time className="font-semibold text-primary flex items-center">
+                    <Calendar className="h-4 w-4 mr-1" />
+                    2024-Present
+                  </time>
+                </div>
+                <p className="text-muted-foreground mb-2">College Education</p>
+                <p className="text-sm text-muted-foreground">
+                  Currently pursuing IT degree with focus on cybersecurity. Achieved Dean's Lister honors in 2024 and 2025, 
+                  demonstrating consistent academic excellence and dedication to technical learning.
+                </p>
+              </div>
+            </div>
+
+            <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+              <div className="flex items-center justify-center w-10 h-10 rounded-full border border-primary/20 bg-background shadow-sm z-10 md:group-odd:ml-8 md:group-even:mr-8">
+                <Award className="h-5 w-5 text-primary" />
+              </div>
+              <div className="w-full md:w-[calc(50%-4rem)] bg-background p-5 rounded-lg border border-primary/20 shadow-sm">
+                <div className="flex items-center justify-between space-x-2 mb-1">
+                  <h3 className="font-bold text-lg">ECA Cybersecurity Program</h3>
                   <time className="font-semibold text-primary flex items-center">
                     <Calendar className="h-4 w-4 mr-1" />
                     10 Weeks
                   </time>
                 </div>
-                <p className="text-muted-foreground mb-2">Security-First Program</p>
+                <p className="text-muted-foreground mb-2">Security-First Training</p>
                 <p className="text-sm text-muted-foreground">
-                  Completed a comprehensive 10-week program focused on secure AI development lifecycles, layered defenses 
+                  Completed comprehensive cybersecurity program covering secure AI development lifecycles, layered defenses 
                   (WAF, Arcjet, Vercel Firewall), MCP authentication (OAuth 2.1), and practical offensive testing with Kali Linux. 
                   Equipped to evaluate and defend AI systems from development through production.
                 </p>
@@ -247,42 +266,21 @@ export default function AboutPage() {
 
             <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
               <div className="flex items-center justify-center w-10 h-10 rounded-full border border-primary/20 bg-background shadow-sm z-10 md:group-odd:ml-8 md:group-even:mr-8">
-                <Briefcase className="h-5 w-5 text-primary" />
+                <Award className="h-5 w-5 text-primary" />
               </div>
               <div className="w-full md:w-[calc(50%-4rem)] bg-background p-5 rounded-lg border border-primary/20 shadow-sm">
                 <div className="flex items-center justify-between space-x-2 mb-1">
-                  <h3 className="font-bold text-lg">Secure Development Practitioner</h3>
+                  <h3 className="font-bold text-lg">Leadership & Competitions</h3>
                   <time className="font-semibold text-primary flex items-center">
                     <Calendar className="h-4 w-4 mr-1" />
-                    Ongoing
+                    2023-Present
                   </time>
                 </div>
-                <p className="text-muted-foreground mb-2">Skills in Practice</p>
+                <p className="text-muted-foreground mb-2">Student Leadership & Innovation</p>
                 <p className="text-sm text-muted-foreground">
-                  Applying secure development practices including environment hardening, secrets management, 
-                  secure Node.js and VS Code configurations, and secure SDLC basics for AI projects. 
-                  Building portfolio-ready security implementations across multiple projects.
-                </p>
-              </div>
-            </div>
-
-            <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-              <div className="flex items-center justify-center w-10 h-10 rounded-full border border-primary/20 bg-background shadow-sm z-10 md:group-odd:ml-8 md:group-even:mr-8">
-                <Briefcase className="h-5 w-5 text-primary" />
-              </div>
-              <div className="w-full md:w-[calc(50%-4rem)] bg-background p-5 rounded-lg border border-primary/20 shadow-sm">
-                <div className="flex items-center justify-between space-x-2 mb-1">
-                  <h3 className="font-bold text-lg">AI & MCP Security Specialist</h3>
-                  <time className="font-semibold text-primary flex items-center">
-                    <Calendar className="h-4 w-4 mr-1" />
-                    Active
-                  </time>
-                </div>
-                <p className="text-muted-foreground mb-2">Focus Areas</p>
-                <p className="text-sm text-muted-foreground">
-                  Specializing in threat modeling for MCP servers and AI agents, OAuth 2.1 integration and access controls, 
-                  penetration testing fundamentals, and creating executive-ready security assessments. 
-                  Delivering portfolio-ready projects showcasing practical security implementation.
+                  Active in student leadership roles including Social Media Director, Environmental Chairman, PYAP Officer, and SMS Chairman. 
+                  Competed in AI Singapore, App Con, Start Up Challenge, and Agri Tech Innovate (Top 3 Regionals, Top 12 Nationals). 
+                  Awarded Best in Coding, Most Innovative Science Project, and International Work Immersion Award.
                 </p>
               </div>
             </div>

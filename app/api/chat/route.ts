@@ -55,14 +55,14 @@ async function buildPortfolioContext() {
 function buildLocalReply(input: string, context: { postsSummary: string; projectsSummary: string }) {
   const message = input.toLowerCase();
   const contact = "Contact: digapbrix@gmail.com";
-  const focus = "Focus: AI security, MCP defense, secure development, cybersecurity fundamentals.";
+  const focus = "Completed ECA Cybersecurity Program (10 weeks): AI security, MCP defense, layered defenses, Kali Linux testing.";
 
   if (/\b(hi|hello|hey|good morning|good afternoon|good evening)\b/.test(message)) {
     return "Hi! I can answer questions about Brix, projects, blog posts, and this portfolio.";
   }
 
   if (/\b(name|who are you|about you|about me|bio|background)\b/.test(message)) {
-    return `Brix Digap is a cybersecurity student focused on AI security and secure development. ${focus}`;
+    return `Brix Digap is a 2nd-year IT student and ECA Cybersecurity Program graduate. ${focus}`;
   }
 
   if (/\b(contact|email|reach|hire)\b/.test(message)) {
