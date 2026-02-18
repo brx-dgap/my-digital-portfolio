@@ -2,7 +2,7 @@
 
 import { db, projects } from "@/lib/db";
 import { isAdmin } from "@/lib/auth";
-import { asc } from "drizzle-orm";
+import { asc, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { 
@@ -138,6 +138,41 @@ export async function createProject(
       success: false, 
       message: "An unexpected error occurred while creating the project.", 
       project: null 
+    };
+  }
+}
+
+/**
+ * Server action to delete a project by ID
+ * Only admins can delete projects
+ */
+export async function deleteProject(projectId: number) {
+  try {
+    // Check if the user is an admin
+    const userIsAdmin = await isAdmin();
+    if (!userIsAdmin) {
+      return { 
+        success: false, 
+        message: "Unauthorized. Only admins can delete projects."
+      };
+    }
+    
+    // Delete the project from the database
+    await db.delete(projects).where(eq(projects.id, projectId));
+    
+    // Revalidate the path to update the cache
+    revalidatePath("/projects");
+
+    return { 
+      success: true, 
+      message: "Project deleted successfully!" 
+    };
+    
+  } catch (error) {
+    console.error("Error deleting project:", error);
+    return { 
+      success: false, 
+      message: "An unexpected error occurred while deleting the project." 
     };
   }
 }

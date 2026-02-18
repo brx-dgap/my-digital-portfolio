@@ -2,6 +2,7 @@ import { Shield, AlertTriangle, FileCode, Lock, Server, Users } from "lucide-rea
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import ClientProjectAdmin from "@/components/client-project-admin"
 import { getProjects } from "@/app/actions/projects"
+import ProjectCard from "@/components/project-card"
 
 // Map icon strings to Lucide components
 const iconMap = {
@@ -15,8 +16,6 @@ const iconMap = {
 
 export default async function ProjectsPage() {
   // Fetch projects directly using the server action.
-  // Error handling can be added here if needed (e.g., display an error message)
-  // but the fallback logic is removed per the request.
   const projects = await getProjects(); 
 
   return (
@@ -41,32 +40,17 @@ export default async function ProjectsPage() {
       <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
         <div className="container px-4 md:px-6">
           <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-            {/* Ensure projects is an array before mapping */}
+            {/* Use the new ProjectCard component with delete functionality */}
             {Array.isArray(projects) && projects.map((project) => {
-              // Type guard for items remains useful if the action could potentially return non-array items
               if (!Array.isArray(project.items)) return null; 
               const IconComponent = iconMap[project.icon as keyof typeof iconMap] || Shield; 
               
               return (
-                <Card key={project.id} className="bg-background border-primary/20">
-                  <CardHeader>
-                    <div className="bg-primary/10 p-3 w-fit rounded-lg mb-4">
-                      <IconComponent className="h-8 w-8 text-primary" />
-                    </div>
-                    <CardTitle>{project.title}</CardTitle>
-                    <CardDescription>{project.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2 mb-6">
-                      {project.items.map((item, i) => ( 
-                        <li key={i} className="flex items-center gap-2">
-                          <Shield className="h-4 w-4 text-primary" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
+                <ProjectCard 
+                  key={project.id}
+                  project={project}
+                  IconComponent={IconComponent}
+                />
               )
             })}
           </div>
